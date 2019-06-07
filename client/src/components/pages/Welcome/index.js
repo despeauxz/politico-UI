@@ -2,6 +2,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import HomeHeader from '../../shared/Header/HomeHeader';
+import Icon from '../../../../public/img/undraw.png';
 
 const Welcome = () => {
     return (
@@ -17,10 +18,10 @@ const Welcome = () => {
                     <section className="intro">
                         <h1>Make your vote count</h1>
                         <p className="subhead">Voting is not our right, it's our power.</p>
-                        <Link to="/auth/signin" className="cta_link">Sign Up</Link>
+                        <Link to="/auth/signup" className="cta_link">Sign Up</Link>
                     </section>
                     <section>
-                        <img src="https://despeauxz.github.io/Politico/ui/assets/img/undraw.png" alt="undraw icon" />
+                        <img src={Icon} alt="undraw icon" />
                     </section>
                 </div>
             </div>
@@ -73,8 +74,8 @@ const Welcome = () => {
                         <p className="desc">Designed by Malik Godwin Onimisi</p>
                         <p>Andela Bootcamp Challenge, Cycle 41</p>
                         <ul className="footer-links">
-                            <li><a href="#">Terms of Service</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><Link to="#">Terms of Service</Link></li>
+                            <li><Link to="#">Privacy Policy</Link></li>
                         </ul>
                     </div>
                 </div>

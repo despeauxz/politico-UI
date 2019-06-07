@@ -2,11 +2,13 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { createBrowserHistory } from 'history';
 import { UNAUTHENTICATED } from '../constants/actionTypes';
+import auth from './auth';
 
 export const history = createBrowserHistory();
 
 const appReducer = combineReducers({
-    router: routerReducer
+    router: routerReducer,
+    auth
 });
 
 /**

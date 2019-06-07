@@ -4,13 +4,18 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './components/App';
 import store from './store/configureStore';
+import refreshPage from '../src/utils/refreshPage';
+import { ToastProvider } from 'react-toast-notifications';
 
+refreshPage(store);
 
 const renderApp = (Root) => {
     render(
         <AppContainer>
             <Provider store={store}>
-                <Root />
+                <ToastProvider>
+                    <Root />
+                </ToastProvider>
             </Provider>
         </AppContainer>,
         document.getElementById('root')
