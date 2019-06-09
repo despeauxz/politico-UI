@@ -1,23 +1,26 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Logo from '../../../../public/img/logo2.png';
+import Ham from '../../../../public/img/ham.svg';
+import Exit from '../../../../public/img/exit.svg';
 
 
 class HomeHeader extends Component {
     render() {
         return (
             <header className="home-landing">
-                <a href="i" className="">
-                    <img src="https://despeauxz.github.io/Politico/ui/assets/img/logo2.png" alt="logo" className="logo" />
-                </a>
+                <Link to="/" className="">
+                    <img src={Logo} alt="logo" className="logo" />
+                </Link>
 
                 <nav>
                     <a href="#" className="hide-desktop">
-                        <img src="https://despeauxz.github.io/Politico/ui/assets/img/ham.svg" alt="toggle menu" className="menu" id="menu" />
+                        <img src={Ham} alt="toggle menu" className="menu" id="menu" />
                     </a>
                     <ul className="show-desktop hide-mobile" id="nav">
                         <li id="exit" className="exit-btn hide-desktop exit">
-                            <img src="https://despeauxz.github.io/Politico/ui/assets/img/exit.svg" alt="Exit toggle" />
+                            <img src={Exit} alt="Exit toggle" />
                         </li>
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="#">Policy</Link></li>
