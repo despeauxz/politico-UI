@@ -8,7 +8,7 @@ import axios from 'axios';
  * @returns {func} axios instance
  */
 const authAPI = (type, user) => 
-    axios(`https://politicorish.herokuapp.com/api/v1/auth/${type}`, {
+    axios(`https://cryptic-escarpment-28116.herokuapp.com/api/v1/auth/${type}`, {
         method: 'POST',
         data: user,
         headers: {

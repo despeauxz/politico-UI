@@ -4,9 +4,9 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: path.join(__dirname, 'client/src', 'index.jsx'),
     output: {
-        path: path.join(__dirname),
+        path: path.join(__dirname, './client/dist'),
         filename: '[hash].bundle.js',
-        publicPath: '/'
+        publicPath: ''
     },
     mode: process.env.NODE_ENV || 'development',
     resolve: {
@@ -43,5 +43,5 @@ module.exports = {
                 loaders: ["file-loader"]
             }
         ]
-    }
+    },
 };

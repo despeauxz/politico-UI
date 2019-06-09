@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SignupForm from '../shared/Form/SignupForm';
 import Header from '../shared/Header/HomeHeader';
+import { renderAuthPropTypes } from '../../helpers/proptypes';
 
 class Auth extends Component {
     static propTypes = {
@@ -54,5 +55,13 @@ class Auth extends Component {
         );
     }
 }
+
+Auth.propTypes = {
+    ...renderAuthPropTypes,
+};
+
+Auth.defaultProps = {
+    type: null
+};
 
 export default Auth;

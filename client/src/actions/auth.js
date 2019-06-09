@@ -1,6 +1,7 @@
-import instance from "../config/axios";
+import { toastr } from 'react-redux-toastr';
 import errorHandler from '../helpers/errorHandler';
 import authAPI from '../utils/api/authAPI';
+import jwt_decode from 'jwt-decode';
 import {
     AUTHENTICATING,
     AUTHENTICATED,
@@ -76,7 +77,7 @@ export const resetUser = () => ({
     type: UNAUTHENTICATED
 });
 
-export const auth = (type, user) => async (dispatch) => {
+export const auth = (type, user, history) => async (dispatch) => {
     try {
 
         dispatch(authenticating());
@@ -85,9 +86,20 @@ export const auth = (type, user) => async (dispatch) => {
 
         const dispatchType = type === 'signup' ? signupSuccess : signinSuccess;
         dispatch(dispatchType(response.data.data.user));
+        toastr.success('Success', 'Successfully registered');
+        if (response.data.data.user.isAdmin === true) {
+            history.push('/dashboard');
+        } else {
+            history.push('/home');
+        }
     } catch (error) {
         const errorResponse = errorHandler(error);
         const dispatchType = type === 'signup' ? signupFailure : signinFailure;
+        if (type === 'signup') {
+            if (errorResponse.response === "Email already taken") {
+                toastr.error('Error', errorResponse.response);
+            }
+        }
 
         dispatch(dispatchType(errorResponse.response));
     }
@@ -97,11 +109,9 @@ export const authenticateUser = () => async (dispatch) => {
     try {
         dispatch(authenticating());
     
-        const res = await instance.get('/auth/refresh_token');
+        const res = jwt_decode(localStorage.getItem('jwtToken'));
     
-        localStorage.setItem('jwtToken', res.data.token);
-    
-        dispatch(authenticationSuccess(res.data.user));
+        dispatch(authenticationSuccess(res.user));
     } catch (error) {
         const errorResponse = errorHandler(error);
     

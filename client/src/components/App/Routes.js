@@ -6,16 +6,15 @@ import Auth from '../pages/Auth';
 import NotFound from '../pages/NotFound';
 
 
-const Routes = () => {
-    return (
-        <BrowserRouter>
-            <Switch>
-                <Route exact path="/" component={Welcome} />
-                <Route exact path="/auth/signup" render={props => <Auth type="signup" />} />
-                <Route path="/*" component={NotFound} />
-            </Switch>
-        </BrowserRouter>
-    );
-};
+// eslint-disable-next-line no-extra-parens
+const Routes = () => (
+    <BrowserRouter>
+        <Switch>
+            <Route exact path="/" component={Welcome} />
+            <Route exact path="/auth/signup" render={props => <Auth {...props} type="signup" />} />
+            <Route path="/*" component={NotFound} />
+        </Switch>
+    </BrowserRouter>
+);
 
 export default Routes;

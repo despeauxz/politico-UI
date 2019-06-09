@@ -1,0 +1,12 @@
+$crimson: crimson;
+
+.error {
+    border-color: $crimson !important;
+}
+
+.error-text {
+    color: $crimson;
+    text-align: left;
+    font-size: 12px;
+    text-transform: capitalize;
+}

@@ -14,7 +14,7 @@ import {
 
 const initialState = {
     isAuthenticated: !!localStorage.getItem('jwtToken'),
-    error: null,
+    errors: {},
     user: {},
     loading: false,
     working: false,
@@ -44,7 +44,7 @@ export default (state = initialState, action) => {
             ...state,
             isAuthenticated: true,
             user: action.payload,
-            error: null,
+            errors: {},
             loading: false
         };
     case UNAUTHENTICATED:
@@ -52,7 +52,7 @@ export default (state = initialState, action) => {
         return {
             ...state,
             isAuthenticated: false,
-            error: null,
+            errors: {},
             loading: false
         };
     case AUTHENTICATION_ERROR:
@@ -62,7 +62,7 @@ export default (state = initialState, action) => {
             ...state,
             isAuthenticated: false,
             user: {},
-            error: action.payload,
+            errors: action.payload,
             loading: false
         };
     default:

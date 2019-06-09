@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const instance = axios.create({
-    baseURL: 'https://politicorish.herokuapp.com/api/v1',
+    baseURL: 'https://cryptic-escarpment-28116.herokuapp.com/api/v1',
 });
 
 instance.interceptors.request.use((config) => {
@@ -16,7 +16,7 @@ instance.interceptors.response.use(
     (error) => {
         const { response: { status, data } } = error;
 
-        if (status === 403 && data.error === 'Token is expired') {
+        if (status === 403 && data.error === 'Token Expired') {
             window.location.reload();
         }
 

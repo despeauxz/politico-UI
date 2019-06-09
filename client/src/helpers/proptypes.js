@@ -5,15 +5,16 @@ const renderAuthPropTypes = {
 };
 
 const authPropTypes = {
+    auth: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
-    error: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
     working: PropTypes.bool.isRequired
 };
 
 
-export default {
+export {
     renderAuthPropTypes,
     authPropTypes,
 };
