@@ -1,16 +1,17 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
-const htmlPlugin = new HtmlWebpackPlugin({
+const htmlPlugin = new HtmlWebPackPlugin({
     title: 'Politico',
     template: 'client/src/index.html',
     filename: 'index.html'
 });
 
 module.exports = {
+    entry: path.join(__dirname, 'client/src', 'index.jsx'),
     output: {
-        path: path.resolve(__dirname, 'client/dist'),
-        filename: '[name].bundle.js',
+        path: path.join(__dirname, './client/dist'),
+        filename: '[hash].bundle.js',
         publicPath: '/'
     },
     module: {
@@ -22,11 +23,7 @@ module.exports = {
             },
             {
                 test: /\.(css|scss)$/,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    "sass-loader"
-                ]
+                use: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
                 test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
@@ -35,9 +32,9 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.js', '.json', '.jsx']
+        extensions: ['.jsx', '.js', '.png', '.svg', '.ico', '.jpg'],
     },
     plugins: [
-        htmlPlugin
-    ],
+        htmlPlugin,
+    ]
 };

@@ -4,22 +4,20 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Preloader from '../../shared/Preloader/Preloader';
+import PropTypes from 'prop-types';
 import { authPropTypes } from '../../../helpers/proptypes';
 import classNames from 'classnames';
 import { auth } from '../../../actions/auth';
 import './Form.scss';
 
 
-class SignupForm extends Component {
+class LoginFrom extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            firstname: '',
-            lastname: '',
             email: '',
             password: '',
-            passwordConfirm: '',
             errors: {},
         };
     }
@@ -36,14 +34,11 @@ class SignupForm extends Component {
         event.preventDefault();
         
         const values = {
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
             email: this.state.email,
             password: this.state.password,
-            passwordConfirm: this.state.passwordConfirm
         };
 
-        this.props.auth('signup', values, this.props.history);
+        this.props.auth('login', values, this.props.history);
     }
 
     componentDidMount() {
@@ -65,6 +60,7 @@ class SignupForm extends Component {
     render() {
         const { isLoading } = this.props;
         const { errors } = this.state;
+
         return (
             <Fragment>
                 { typeof errors === 'string' ? 
@@ -73,40 +69,6 @@ class SignupForm extends Component {
                     </div> : ''
                 }
                 <form role="signup" className="auth_form" method="POST" onSubmit={this.handleSubmit.bind(this)} noValidate>
-                    <div className="d-flex-lg">
-                        <div className="form-group">
-                            <label htmlFor="firstname" className="control-label">First name</label>
-                            <input 
-                                type="text"
-                                name="firstname"
-                                className={classNames('form-control', { 'error': errors.firstname })}
-                                placeholder="First name"
-                                onChange={this.handleChange.bind(this)}
-                                value={this.state.firstname}
-                            />
-                            {errors.firstname &&
-                                <div className="error-text">
-                                    {errors.firstname.msg}
-                                </div>
-                            }
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="lastname" className="control-label">Last name</label>
-                            <input 
-                                type="text"
-                                name="lastname"
-                                className={classNames('form-control', { 'error': errors.lastname })}
-                                placeholder="Last name"
-                                onChange={this.handleChange.bind(this)}
-                                value={this.state.lastname}
-                            />
-                            {errors.lastname &&
-                                <div className="error-text">
-                                    {errors.lastname.msg}
-                                </div>
-                            }
-                        </div>
-                    </div>
                     <div className="d-flex-col">
                         <div className="form-group">
                             <label htmlFor="email" className="control-label">Email Address</label>
@@ -143,25 +105,7 @@ class SignupForm extends Component {
                             }
                         </div>
                     </div>
-                    <div className="d-flex-col">
-                        <div className="form-group">
-                            <label htmlFor="confirm-password" className="control-label">Confirm Password</label>
-                            <input 
-                                type="password"
-                                name="passwordConfirm"
-                                className={classNames('form-control', { 'error': errors.passwordConfirm })}
-                                placeholder="********"
-                                onChange={this.handleChange.bind(this)}
-                                value={this.state.passwordConfirm}
-                            />
-                            {errors.passwordConfirm &&
-                                <div className="error-text">
-                                    {errors.passwordConfirm.msg}
-                                </div>
-                            }
-                        </div>
-                    </div>
-    
+
                     <button className="btn btn-block btn-primary" disabled={this.props.isLoading} type="submit">
                         {isLoading === true ?
                             <Preloader
@@ -171,27 +115,29 @@ class SignupForm extends Component {
                                 width="15"
                                 color="white"
                             />
-                            : 'Sign Up'}
+                            : 'Login'}
                     </button>
                 </form>
-    
+
                 <div className="addon_info">
-                    <p>By clicking the &ldquo;Sign Up&rdquo; button, you have agreed to our 
-                        <Link to="#" className="link"> Privacy Policy</Link>, 
-                        <Link to="#" className="link"> Terms and Conditions</Link> and you are a Nigerian
+                    <p>
+                        Don&apos;t have an account,  
+                        <Link to="/auth/signup" className="link"> Create Account</Link>
                     </p>
-                    <p>Already have an account, <Link to="/auth/login" className="link"> Login</Link></p>
+                    <p>
+                        <Link to="/auth/forgot_password" className="link">Forgot Password</Link>
+                    </p>
                 </div>
             </Fragment>
         );
     }
 }
 
-SignupForm.propTypes = {
+LoginFrom.propTypes = {
     ...authPropTypes
 };
 
-SignupForm.defaultProps = {
+LoginFrom.defaultProps = {
     loading: false,
     working: false
 };
@@ -203,4 +149,4 @@ const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { auth })(withRouter(SignupForm));
+export default connect(mapStateToProps, { auth })(withRouter(LoginFrom));

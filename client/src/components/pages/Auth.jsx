@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SignupForm from '../shared/Form/SignupForm';
+import LoginFrom from '../shared/Form/LoginForm';
 import Header from '../shared/Header/HomeHeader';
 import { renderAuthPropTypes } from '../../helpers/proptypes';
 
@@ -28,7 +29,7 @@ class Auth extends Component {
         case 'signup':
             return <SignupForm />;
         default:
-            return 'Login';
+            return <LoginFrom />;
         }
     }
 
