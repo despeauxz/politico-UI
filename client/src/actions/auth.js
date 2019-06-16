@@ -86,7 +86,9 @@ export const auth = (type, user, history) => async (dispatch) => {
 
         const dispatchType = type === 'signup' ? signupSuccess : signinSuccess;
         dispatch(dispatchType(response.data.data.user));
-        toastr.success('Success', 'Successfully registered');
+        if (type === 'signup') {
+            toastr.success('Success', 'Successfully registered');
+        }
         if (response.data.data.user.isAdmin === true) {
             history.push('/dashboard');
         } else {
@@ -95,11 +97,6 @@ export const auth = (type, user, history) => async (dispatch) => {
     } catch (error) {
         const errorResponse = errorHandler(error);
         const dispatchType = type === 'signup' ? signupFailure : signinFailure;
-        if (type === 'signup') {
-            if (errorResponse.response === "Email already taken") {
-                toastr.error('Error', errorResponse.response);
-            }
-        }
 
         dispatch(dispatchType(errorResponse.response));
     }
