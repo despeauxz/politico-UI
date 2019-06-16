@@ -20,6 +20,6 @@ checkRole.propTypes = {
     user: PropTypes.object.isRequired,
     authenticating: PropTypes.bool.isRequired,
     MyComponent: PropTypes.func.isRequired
-}
+};
 
 export default checkRole;

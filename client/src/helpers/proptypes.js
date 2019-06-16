@@ -7,10 +7,14 @@ const renderAuthPropTypes = {
 const authPropTypes = {
     auth: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
-    errors: PropTypes.object.isRequired,
+    errors: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object
+    ]),
     user: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
-    working: PropTypes.bool.isRequired
+    working: PropTypes.bool.isRequired,
+    history: PropTypes.object.isRequired
 };
 
 

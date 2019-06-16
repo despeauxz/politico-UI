@@ -12,6 +12,7 @@ const Routes = () => (
         <Switch>
             <Route exact path="/" component={Welcome} />
             <Route exact path="/auth/signup" render={props => <Auth {...props} type="signup" />} />
+            <Route exact path="/auth/login" render={props => <Auth {...props} type="login" />} />
             <Route path="/*" component={NotFound} />
         </Switch>
     </BrowserRouter>
