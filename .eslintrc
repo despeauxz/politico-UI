@@ -11,10 +11,18 @@
         }
     },
     "env": {
-        "es6":     true,
-        "browser": true,
-        "node":    true,
-        "mocha":   true
+      "node": true,
+      "browser": true,
+      "es6": true,
+      "mocha": true,
+      "jest": true
+    },
+    "globals": {
+      "shallow": true,
+      "mount": true,
+      "expect": true,
+      "render": true,
+      "toJson": true
     },
     "extends": [
         "eslint:recommended",

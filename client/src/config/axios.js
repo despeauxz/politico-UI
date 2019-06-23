@@ -16,7 +16,7 @@ instance.interceptors.response.use(
     (error) => {
         const { response: { status, data } } = error;
 
-        if (status === 403 && data.error === 'Token Expired') {
+        if (status === 401 && data.error === 'Token Expired') {
             window.location.reload();
         }
 

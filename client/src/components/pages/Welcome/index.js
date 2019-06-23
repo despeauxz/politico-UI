@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import HomeHeader from '../../shared/Header/HomeHeader';
-import Icon from '../../../../public/img/undraw.png';
+import HomeHeader from '@components/shared/Header/HomeHeader';
+import Icon from '@base/img/undraw.png';
 
 const Welcome = () => {
     return (
@@ -17,7 +17,7 @@ const Welcome = () => {
                 <div className="page_header">
                     <section className="intro">
                         <h1>Make your vote count</h1>
-                        <p className="subhead">Voting is not our right, it's our power.</p>
+                        <p className="subhead">Voting is not our right, it&apos;s our power.</p>
                         <Link to="/auth/signup" className="cta_link">Sign Up</Link>
                     </section>
                     <section>
@@ -83,5 +83,6 @@ const Welcome = () => {
         </Fragment>
     );
 };
+
 
 export default Welcome;

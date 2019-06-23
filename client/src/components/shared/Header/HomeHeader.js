@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../../../../public/img/logo2.png';
-import Ham from '../../../../public/img/ham.svg';
-import Exit from '../../../../public/img/exit.svg';
+import Logo from '@base/img/logo2.png';
+import Ham from '@base/img/ham.svg';
+import Exit from '@base/img/exit.svg';
 
 
 class HomeHeader extends Component {

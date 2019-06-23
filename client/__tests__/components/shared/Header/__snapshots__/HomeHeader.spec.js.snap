@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HomeHeader /> render the home header component 1`] = `
+<header
+  className="home-landing"
+>
+  <Link
+    className=""
+    to="/"
+  >
+    <img
+      alt="logo"
+      className="logo"
+      src={
+        Object {
+          "process": [Function],
+        }
+      }
+    />
+  </Link>
+  <nav>
+    <a
+      className="hide-desktop"
+      href="#"
+    >
+      <img
+        alt="toggle menu"
+        className="menu"
+        id="menu"
+        src={
+          Object {
+            "process": [Function],
+          }
+        }
+      />
+    </a>
+    <ul
+      className="show-desktop hide-mobile"
+      id="nav"
+    >
+      <li
+        className="exit-btn hide-desktop exit"
+        id="exit"
+      >
+        <img
+          alt="Exit toggle"
+          src={
+            Object {
+              "process": [Function],
+            }
+          }
+        />
+      </li>
+      <li>
+        <Link
+          to="/"
+        >
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="#"
+        >
+          Policy
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/auth/login"
+        >
+          Login
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/auth/signup"
+        >
+          Sign Up
+        </Link>
+      </li>
+    </ul>
+  </nav>
+</header>
+`;

@@ -10,6 +10,10 @@
     margin-bottom: .6em;
 }
 
+input:focus {
+    outline: none;
+}
+
 .form-control {
     width: 100%;
     border: 1px solid #DFE6E6;

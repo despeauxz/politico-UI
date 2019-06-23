@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import Header from '../../shared/Header/HomeHeader';
+import Header from '@components/shared/Header/HomeHeader';
 
 
 const NotFound = () => {

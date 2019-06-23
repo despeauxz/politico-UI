@@ -20,8 +20,8 @@ const Preloader = ({ type, style, height, width, color }) => {
 Preloader.propTypes = {
     type: PropTypes.string,
     style: PropTypes.string,
-    height: PropTypes.string,
-    width: PropTypes.string,
+    height: PropTypes.number,
+    width: PropTypes.number,
     color: PropTypes.string
 };
 

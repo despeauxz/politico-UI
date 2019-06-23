@@ -3,12 +3,14 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Preloader from '../../shared/Preloader/Preloader';
-import { authPropTypes } from '../../../helpers/proptypes';
+import Preloader from '@components/shared/Preloader/Preloader';
+import { authPropTypes } from '@helpers/proptypes';
+import RenderInput from '@components/shared/FormComponent/RenderInput';
 import classNames from 'classnames';
-import { auth } from '../../../actions/auth';
+import { auth } from '@actions/auth';
+import validation from '@helpers/validations/validation';
+import formValidator from "@helpers/validations/validateRequiredFormFields";
 import './Form.scss';
-
 
 class SignupForm extends Component {
     constructor(props) {
@@ -21,29 +23,69 @@ class SignupForm extends Component {
             password: '',
             passwordConfirm: '',
             errors: {},
+            formErrors: {
+                firstname: '',
+                lastname: '',
+                email: '',
+                password: '',
+                passwordConfirm: '',
+            }
         };
     }
 
     handleChange(e) {
         e.preventDefault();
         const { name, value } = e.target;
+
+        let formErrors = this.state.formErrors;
+
+        // switch(name) {
+        // case "firstname":
+        //     formErrors.firstname = value.length < 3
+        //         ? "minimum 3 characters required" : "";
+        //     break;
+        // case "lastname":
+        //     formErrors.lastname = value.length < 3
+        //         ? "minimum 3 characters required": "";
+        //     break;
+        // case "email":
+        //     formErrors.email = emailRegex.test(value)
+        //         ? "": "Invalid email address";
+        //     break;
+        // case "password":
+        //     formErrors.password = value.length < 6
+        //         ? "Password must be 6 characters long": "";
+        //     break;
+        // // case "passwordConfirm":
+        // //     formErrors.passwordConfirm = value !== this.state.passwordConfirm
+        // //         ? "Passwords don't match": "";
+        // //     break;
+        // default:
+        //     break;
+        // }
+
         this.setState({
-            [name]: value
+            formErrors, [name]: value
         });
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        
-        const values = {
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            email: this.state.email,
-            password: this.state.password,
-            passwordConfirm: this.state.passwordConfirm
+        const { firstname, lastname, email, password, passwordConfirm } = this.state;
+
+        const userDetails = {
+            firstname,
+            lastname,
+            email,
+            password,
+            passwordConfirm
         };
 
-        this.props.auth('signup', values, this.props.history);
+        const validForm = formValid(this.state.formErrors);
+
+        if (validForm) {
+            this.props.auth('signup', userDetails, this.props.history);
+        }
     }
 
     componentDidMount() {
@@ -64,105 +106,80 @@ class SignupForm extends Component {
 
     render() {
         const { isLoading } = this.props;
-        const { errors } = this.state;
+        const { formErrors, error } = this.state;
         return (
             <Fragment>
                 { typeof errors === 'string' ? 
                     <div className="alert-form">
-                        <p>{errors}</p>
+                        <p>{error}</p>
                     </div> : ''
                 }
                 <form role="signup" className="auth_form" method="POST" onSubmit={this.handleSubmit.bind(this)} noValidate>
                     <div className="d-flex-lg">
-                        <div className="form-group">
-                            <label htmlFor="firstname" className="control-label">First name</label>
-                            <input 
-                                type="text"
-                                name="firstname"
-                                className={classNames('form-control', { 'error': errors.firstname })}
-                                placeholder="First name"
-                                onChange={this.handleChange.bind(this)}
-                                value={this.state.firstname}
-                            />
-                            {errors.firstname &&
-                                <div className="error-text">
-                                    {errors.firstname.msg}
-                                </div>
-                            }
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="lastname" className="control-label">Last name</label>
-                            <input 
-                                type="text"
-                                name="lastname"
-                                className={classNames('form-control', { 'error': errors.lastname })}
-                                placeholder="Last name"
-                                onChange={this.handleChange.bind(this)}
-                                value={this.state.lastname}
-                            />
-                            {errors.lastname &&
-                                <div className="error-text">
-                                    {errors.lastname.msg}
-                                </div>
-                            }
-                        </div>
+                        <RenderInput
+                            name="firstname"
+                            label="First name"
+                            id="firstname"
+                            type="text"
+                            className={classNames('form-control', { 'error': formErrors.firstname })}
+                            placeholder="First name"
+                            value={this.state.firstname}
+                            handleChange={this.handleChange.bind(this)}
+                            error={formErrors.firstname}
+                        />
+                        <RenderInput
+                            name="lastname"
+                            label="Last name"
+                            id="lastname"
+                            type="text"
+                            className={classNames('form-control', { 'error': formErrors.lastname })}
+                            placeholder="First name"
+                            value={this.state.lastname}
+                            handleChange={this.handleChange.bind(this)}
+                            error={formErrors.lastname}
+                        />
                     </div>
                     <div className="d-flex-col">
-                        <div className="form-group">
-                            <label htmlFor="email" className="control-label">Email Address</label>
-                            <input 
-                                type="email"
-                                name="email"
-                                className={classNames('form-control', { 'error': errors.email })}
-                                placeholder="exampe@email.com"
-                                onChange={this.handleChange.bind(this)}
-                                value={this.state.email}
-                            />
-                            {errors.email &&
-                                <div className="error-text">
-                                    {errors.email.msg}
-                                </div>
-                            }
-                        </div>
+                        <RenderInput
+                            name="email"
+                            label="Email Address"
+                            id="email"
+                            type="email"
+                            className={classNames('form-control', { 'error': formErrors.email })}
+                            placeholder="Email Address"
+                            value={this.state.email}
+                            handleChange={this.handleChange.bind(this)}
+                            error={formErrors.email}
+                        />
                     </div>
                     <div className="d-flex-col">
-                        <div className="form-group">
-                            <label htmlFor="password" className="control-label">Password</label>
-                            <input 
-                                type="password"
-                                name="password"
-                                className={classNames('form-control', { 'error': errors.password })}
-                                placeholder="*********"
-                                onChange={this.handleChange.bind(this)}
-                                value={this.state.password}
-                            />
-                            {errors.password &&
-                                <div className="error-text">
-                                    {errors.password.msg}
-                                </div>
-                            }
-                        </div>
+                        <RenderInput
+                            name="password"
+                            label="Password"
+                            id="password"
+                            type="password"
+                            className={classNames('form-control', { 'error': formErrors.password })}
+                            placeholder="***********"
+                            value={this.state.password}
+                            handleChange={this.handleChange.bind(this)}
+                            error={formErrors.password}
+                        />
                     </div>
                     <div className="d-flex-col">
-                        <div className="form-group">
-                            <label htmlFor="confirm-password" className="control-label">Confirm Password</label>
-                            <input 
-                                type="password"
-                                name="passwordConfirm"
-                                className={classNames('form-control', { 'error': errors.passwordConfirm })}
-                                placeholder="********"
-                                onChange={this.handleChange.bind(this)}
-                                value={this.state.passwordConfirm}
-                            />
-                            {errors.passwordConfirm &&
-                                <div className="error-text">
-                                    {errors.passwordConfirm.msg}
-                                </div>
-                            }
-                        </div>
+                        <RenderInput
+                            name="passwordConfirm"
+                            label="Confirm Password"
+                            id="passwordConfirm"
+                            type="password"
+                            className={classNames('form-control', { 'error': formErrors.passwordConfirm })}
+                            placeholder="***********"
+                            value={this.state.passwordConfirm}
+                            handleChange={this.handleChange.bind(this)}
+                            error={formErrors.passwordConfirm}
+                        />
                     </div>
     
-                    <button className="btn btn-block btn-primary" disabled={this.props.isLoading} type="submit">
+                    <button className="btn btn-block btn-primary" disabled={isLoading} type="submit">
                         {isLoading === true ?
                             <Preloader
                                 type="button"

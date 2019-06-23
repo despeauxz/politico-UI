@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import SignupForm from '../shared/Form/SignupForm';
-import LoginFrom from '../shared/Form/LoginForm';
-import Header from '../shared/Header/HomeHeader';
-import { renderAuthPropTypes } from '../../helpers/proptypes';
+import SignupForm from '@components/shared/Form/SignupForm';
+import LoginFrom from '@components/shared/Form/LoginForm';
+import Header from '@components/shared/Header/HomeHeader';
+import { renderAuthPropTypes } from '@helpers/proptypes';
 
 class Auth extends Component {
     static propTypes = {

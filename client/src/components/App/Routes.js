@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Welcome from '../pages/Welcome';
-import Auth from '../pages/Auth';
-import NotFound from '../pages/NotFound';
+import Welcome from '@components/pages/Welcome';
+import Auth from '@components/pages/Auth';
+import NotFound from '@components/pages/NotFound';
 
 
 // eslint-disable-next-line no-extra-parens
