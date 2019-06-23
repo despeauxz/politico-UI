@@ -3,7 +3,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import rootReducer, { history } from '../reducers/rootReducer';
+import rootReducer, { history } from '@reducers/rootReducer';
 
 const enhancers = [];
 const middlewares = [thunk, routerMiddleware(history)];

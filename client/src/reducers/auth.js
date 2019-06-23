@@ -10,7 +10,7 @@ import {
     SIGNUP_ERROR,
     SET_AUTH_WORKING,
     UNSET_AUTH_WORKING,
-} from "../constants/actionTypes";
+} from "@constant/actionTypes";
 
 const initialState = {
     isAuthenticated: !!localStorage.getItem('jwtToken'),

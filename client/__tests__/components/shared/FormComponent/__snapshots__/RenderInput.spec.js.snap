@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Input should render the RenderInput component when used 1`] = `
+<Fragment>
+  <div
+    className="form-group"
+  >
+    <label
+      className="control-label"
+      htmlFor="name"
+    >
+      Name
+    </label>
+    <input
+      className=""
+      id="name"
+      name="name"
+      onChange={[Function]}
+      placeholder="Name"
+      type="text"
+      value=""
+    />
+  </div>
+</Fragment>
+`;

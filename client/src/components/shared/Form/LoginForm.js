@@ -3,11 +3,11 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Preloader from '../../shared/Preloader/Preloader';
-import PropTypes from 'prop-types';
-import { authPropTypes } from '../../../helpers/proptypes';
+import Preloader from '@components/shared/Preloader/Preloader';
+import RenderInput from '@components/shared/FormComponent/RenderInput';
+import { authPropTypes } from '@helpers/proptypes';
 import classNames from 'classnames';
-import { auth } from '../../../actions/auth';
+import { auth } from '@actions/auth';
 import './Form.scss';
 
 
@@ -70,40 +70,32 @@ class LoginFrom extends Component {
                 }
                 <form role="signup" className="auth_form" method="POST" onSubmit={this.handleSubmit.bind(this)} noValidate>
                     <div className="d-flex-col">
-                        <div className="form-group">
-                            <label htmlFor="email" className="control-label">Email Address</label>
-                            <input 
-                                type="email"
-                                name="email"
-                                className={classNames('form-control', { 'error': errors.email })}
-                                placeholder="exampe@email.com"
-                                onChange={this.handleChange.bind(this)}
-                                value={this.state.email}
-                            />
-                            {errors.email &&
-                                <div className="error-text">
-                                    {errors.email.msg}
-                                </div>
-                            }
-                        </div>
+                        <RenderInput
+                            name="email"
+                            label="Email Adress"
+                            id="email"
+                            type="email"
+                            className={classNames('form-control', { 'error': errors.email })}
+                            placeholder="example@email.com"
+                            value={this.state.email}
+                            handleChange={this.handleChange.bind(this)}
+                            error={errors.email}
+                            required
+                        />
                     </div>
                     <div className="d-flex-col">
-                        <div className="form-group">
-                            <label htmlFor="password" className="control-label">Password</label>
-                            <input 
-                                type="password"
-                                name="password"
-                                className={classNames('form-control', { 'error': errors.password })}
-                                placeholder="*********"
-                                onChange={this.handleChange.bind(this)}
-                                value={this.state.password}
-                            />
-                            {errors.password &&
-                                <div className="error-text">
-                                    {errors.password.msg}
-                                </div>
-                            }
-                        </div>
+                        <RenderInput
+                            name="password"
+                            label="Password"
+                            id="password"
+                            type="password"
+                            className={classNames('form-control', { 'error': errors.password })}
+                            placeholder="************"
+                            value={this.state.password}
+                            handleChange={this.handleChange.bind(this)}
+                            error={errors.password}
+                            required
+                        />
                     </div>
 
                     <button className="btn btn-block btn-primary" disabled={this.props.isLoading} type="submit">

@@ -4,13 +4,13 @@ import ReduxToastr from 'react-redux-toastr';
 import 'react-redux-toastr/src/styles/index.scss';
 // import { history } from '../../reducers/rootReducer';
 import Routes from './Routes';
-import '../../../public/css/main.css';
+import '@base/css/main.css';
 
 /**
  * Represents the App Component
  * @returns {component} App
  */
-const App = () => (
+const App = () => 
     <Fragment>
         <Routes />
         <ReduxToastr
@@ -21,6 +21,6 @@ const App = () => (
             transitionOut="fadeOut"
         />
     </Fragment>
-);
+;
 
 export default App;

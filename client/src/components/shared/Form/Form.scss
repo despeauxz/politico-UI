@@ -4,6 +4,11 @@ $crimson: crimson;
     border-color: $crimson !important;
 }
 
+.danger {
+    color: $crimson;
+    font-size: 12px;
+}
+
 .error-text {
     color: $crimson;
     text-align: left;

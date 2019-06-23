@@ -43,3 +43,8 @@
 .btn-disabled {
     background: #444;
 }
+
+button:disabled {
+    cursor: not-allowed !important;
+    pointer-events: none;
+}

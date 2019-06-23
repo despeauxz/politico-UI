@@ -14,6 +14,9 @@ module.exports = {
         filename: '[hash].bundle.js',
         publicPath: '/'
     },
+    performance: {
+        hints: false
+    },
     module: {
         rules: [
             {
@@ -32,7 +35,18 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.jsx', '.js', '.png', '.svg', '.ico', '.jpg'],
+        extensions: ['.jsx', '.js'],
+        alias: {
+            "@components": path.resolve(__dirname, 'client/src/components/'),
+            "@helpers": path.resolve(__dirname, 'client/src/helpers/'),
+            "@reducers": path.resolve(__dirname, 'client/src/reducers/'),
+            "@actions": path.resolve(__dirname, 'client/src/actions/'),
+            "@constant": path.resolve(__dirname, 'client/src/constants/'),
+            "@containers": path.resolve(__dirname, 'client/src/containers/'),
+            "@utils": path.resolve(__dirname, 'client/src/utils/'),
+            "@config": path.resolve(__dirname, 'client/src/config/'),
+            "@base": path.resolve(__dirname, 'client/public/')
+        }
     },
     plugins: [
         htmlPlugin,

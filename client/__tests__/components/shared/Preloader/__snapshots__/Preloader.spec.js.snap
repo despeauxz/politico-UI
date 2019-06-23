@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Preloader /> should render a preloader with type ~ button 1`] = `
+<div
+  className=""
+>
+  <Loader
+    color="green"
+    height={40}
+    type="TailSpin"
+    width={40}
+  />
+</div>
+`;
+
+exports[`<Preloader /> should render a preloader with type ~ main-page 1`] = `
+<div
+  className=""
+>
+  <Loader
+    color="green"
+    height={40}
+    type="TailSpin"
+    width={40}
+  />
+</div>
+`;
