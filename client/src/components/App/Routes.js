@@ -1,13 +1,11 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Welcome from '@components/pages/Welcome';
-import Auth from '@components/pages/Auth';
+import Welcome from '@containers/pages/Welcome';
+import Auth from '@containers/pages/Auth';
 import NotFound from '@components/pages/NotFound';
 
 
-// eslint-disable-next-line no-extra-parens
-const Routes = () => (
+const Routes = () => 
     <BrowserRouter>
         <Switch>
             <Route exact path="/" component={Welcome} />
@@ -15,7 +13,6 @@ const Routes = () => (
             <Route exact path="/auth/login" render={props => <Auth {...props} type="login" />} />
             <Route path="/*" component={NotFound} />
         </Switch>
-    </BrowserRouter>
-);
+    </BrowserRouter>;
 
 export default Routes;

@@ -1,24 +1,21 @@
 import {
     isName,
     isRequired,
-    isValidPasswordConfirm,
     isValidEmail,
     minLength6,
-    maxLength40
+    isValidPasswordConfirm
 } from './validationTypes';
 
-const validation = {
+export default {
+    signup: {
+        firstname: [isRequired, isName],
+        lastname: [isRequired, isName],
+        email: [isRequired, isValidEmail],
+        password: [isRequired, minLength6],
+        passwordConfirm: [isRequired]
+    },
     login: {
         email: [isRequired, isValidEmail],
         password: [isRequired]
-    },
-    signup: {
-        firstname: [isRequired, maxLength40, isName],
-        lastname: [isRequired, maxLength40, isName],
-        email: [isRequired, isValidEmail],
-        password: [isRequired, minLength6],
-        passwordConfirm: [isRequired, isValidPasswordConfirm]
     }
 };
-
-export default validation;

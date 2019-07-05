@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Dashboard/> renders Home page component without crashing 1`] = `
+<Fragment>
+  <Connect(HomeHeader) />
+  <Sidebar />
+  <div
+    className="container mx-auto"
+  />
+</Fragment>
+`;

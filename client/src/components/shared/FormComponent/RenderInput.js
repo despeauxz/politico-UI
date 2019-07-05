@@ -1,6 +1,5 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
-import '../Form/Form.scss';
 
 
 class RenderInput extends Component {
@@ -15,15 +14,20 @@ class RenderInput extends Component {
       required: PropTypes.bool,
       placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number]),
       handleChange: PropTypes.func.isRequired,
+      onFocus: PropTypes.func
   };
 
-  static defaultVProps = {
+  static defaultProps = {
       value: '',
       errors: {}
   };
 
   render() {
-      const { id, type, name, placeholder, className, value, error, required } = this.props;
+      const {
+          id, type, name, placeholder, className,
+          value, error, required, onFocus
+      } = this.props;
+      
       return (
           <Fragment>
               <div className="form-group">
@@ -40,13 +44,15 @@ class RenderInput extends Component {
                       className={className}
                       value={value}
                       onChange={e => this.props.handleChange(e)}
+                      onFocus={onFocus}
+                      error={error}
                   />
-                  {error && <div className="error-text">{error}</div>}
+                  {error && <div className="text-red-600 text-xs text-left mt-1">{error}</div>}
               </div>
           </Fragment>
       );
   }
 }
 
-export default RenderInput;
 
+export default RenderInput;

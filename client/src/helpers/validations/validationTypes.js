@@ -1,4 +1,5 @@
 import isEmail from 'validator/lib/isEmail';
+// import { isEmpty } from 'lodash';
 
 
 export const isRequired = value => value ? undefined : 'Required!';
@@ -14,7 +15,7 @@ export const minLength = min => value =>
 export const minLength6 = minLength(6);
 
 export const isValidEmail = value =>
-    value && !isEmail(value)
+    !value || !isEmail(value)
         ? 'Invalid email address!'
         : undefined;
 

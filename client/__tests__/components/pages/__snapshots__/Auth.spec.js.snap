@@ -1,18 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Auth Pages should render the dashboard if user is logged in and is an admin user 1`] = `
+<Redirect
+  to="/"
+/>
+`;
+
+exports[`Auth Pages should render the home page if user is logged in and is a nominal user 1`] = `
+<Redirect
+  to="/"
+/>
+`;
+
 exports[`Auth Pages should render the login page based on props ~ type 1`] = `
 <Fragment>
+  <HomeHeader />
   <div
-    className="container"
+    className="container mx-auto"
   >
-    <HomeHeader />
     <div
-      className="main-wrapper auth-wrapper"
+      className="w-3/4 mx-auto mt-8 sm:w-11/12 md:w-3/5 lg:w-3/5 xl:w-1/2"
     >
       <div
-        className="auth text-center"
+        className="text-center"
       >
-        <h2>
+        <h2
+          className="text-md font-bold mb-10"
+        >
           Welcome Back
         </h2>
         <hr />
@@ -25,17 +39,19 @@ exports[`Auth Pages should render the login page based on props ~ type 1`] = `
 
 exports[`Auth Pages should render the sign up page based on props ~ type 1`] = `
 <Fragment>
+  <HomeHeader />
   <div
-    className="container"
+    className="container mx-auto"
   >
-    <HomeHeader />
     <div
-      className="main-wrapper auth-wrapper"
+      className="w-3/4 mx-auto mt-8 sm:w-11/12 md:w-3/5 lg:w-3/5 xl:w-1/2"
     >
       <div
-        className="auth text-center"
+        className="text-center"
       >
-        <h2>
+        <h2
+          className="text-md font-bold mb-10"
+        >
           Get Registered Today
         </h2>
         <hr />

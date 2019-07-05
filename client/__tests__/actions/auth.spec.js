@@ -5,6 +5,7 @@ import axios from 'axios';
 import moxios from 'moxios';
 import MockAdapter from 'axios-mock-adapter';
 import instance from '../../src/config/axios';
+import authAPI from '@utils/api/authAPI';
 
 import {
     auth,
@@ -19,13 +20,13 @@ import {
     setAuthWorking,
     unsetAuthWorking,
     logout
-} from '../../src/actions/auth';
+} from '@actions/auth';
 
 const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-const mockReq = new MockAdapter(instance);
 
+jest.mock('../../src/utils/api/authAPI.js');
 
 const store = mockStore({
     isAuthenticated: false,
@@ -51,7 +52,7 @@ const values = {
     password: 'password',
     passwordConfirm: 'password'
 };
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJmaXJzdG5hbWUiOiJKb2huIiwibGFzdG5hbWUiOiJEb2UiLCJvdGhlcm5hbWUiOm51bGwsImVtYWlsIjoiZXhhbXBsZUBnbWFpbC5jb20iLCJwaG9uZU5vIjpudWxsLCJhdmF0YXIiOiJodHRwczovL3d3dy50YW5uZXJmaW5hbmNpYWwuY2Evd3AtY29udGVudC91cGxvYWRzLzIwMTkvMDEvcGVyc29uLXBsYWNlaG9sZGVyLW1hbGUtNS0xLTMwMHgzMDAtMjUweDI1MC5qcGciLCJpc0FkbWluIjpudWxsLCJwYXJ0eUlkIjpudWxsLCJjcmVhdGVkX2F0IjoiMjAxOS0wNi0yMFQyMjoyODoyMy43NTFaIiwibW9kaWZpZWRfYXQiOm51bGx9LCJpYXQiOjE1NjEwNjk3MDMsImV4cCI6MTU2MTE1NjEwM30.JVrgHsOvyAQeZPN-b7xWRPYP7FX7wms10MR3XN5XQB0';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJmaXJzdG5hbWUiOiJKb2huIiwibGFzdG5hbWUiOiJEb2UiLCJvdGhlcm5hbWUiOm51bGwsImVtYWlsIjoiZXhhbXBsZUBnbWFpbC5jb20iLCJwaG9uZU5vIjpudWxsLCJhdmF0YXIiOiJodHRwczovL3d3dy50YW5uZXJmaW5hbmNpYWwuY2Evd3AtY29udGVudC91cGxvYWRzLzIwMTkvMDEvcGVyc29uLXBsYWNlaG9sZGVyLW1hbGUtNS0xLTMwMHgzMDAtMjUweDI1MC5qcGciLCJpc0FkbWluIjpudWxsLCJwYXJ0eUlkIjpudWxsLCJjcmVhdGVkX2F0IjoiMjAxOS0wNi0yMFQyMjoyODoyMy43NTFaIiwibW9kaWZpZWRfYXQiOm51bGx9LCJpYXQiOjE1NjEwNjk3MDN9.n7u_snOEc08NTB8hcVD10fEFTPKPUGbsVp9yaOmqGMY';
 
 describe('Auth actions', () => {
     describe('authenticating', () => {
@@ -154,66 +155,76 @@ describe('Auth actions', () => {
                 moxios.uninstall(axios);
             });
 
-            // it('should dispatch AUTHENTICATING and SIGNIN_SUCCESS on successful login', async (done) => {
-            //     const expectedActions = ['AUTHENTICATING', 'SIGNIN_SUCCESS'];
-      
-            //     moxios.stubRequest(`${url}/auth/login`, {
-            //         status: 200,
-            //         data: { token, ...newUser }
-            //     }, 5);
-      
-            //     await store.dispatch(auth('login', { email: 'example@gmail.com', password: 'password' }, null)).then(() => {
-            //         const dispatchedActions = store.getActions();
-      
-            //         const actionTypes = dispatchedActions.map(action => action.type);
-      
-            //         expect(actionTypes).toEqual(expectedActions);
-            //         expect(localStorage.getItem('jwtToken')).toEqual(token);
-            //     });
+            it('should dispatch AUTHENTICATING and SIGNIN_SUCCESS on successful login', async (done) => {
+                const expectedActions = ['AUTHENTICATING', 'SIGNIN_SUCCESS'];
 
-            //     done();
-            // });
+                authAPI.mockResolvedValue({
+                    data: {
+                        status: 200,
+                        data: { token, ...newUser }
+                    }
+                });
+                const history = { push: jest.fn() };
+      
+                await store.dispatch(auth('login', { email: 'example@gmail.com', password: 'password' }, history)).then(() => {
+                    const dispatchedActions = store.getActions();
+      
+                    const actionTypes = dispatchedActions.map(action => action.type);
+      
+                    expect(actionTypes).toEqual(expectedActions);
+                    expect(localStorage.getItem('jwtToken')).toEqual(token);
+                });
 
-            // it('should dispatch AUTHENTICATING and SIGNIN_ERROR on unsuccessful login', async (done) => {
-            //     const expectedActions = ['AUTHENTICATING', 'SIGNIN_ERROR'];
-      
-            //     moxios.stubRequest(`${url}/auth/login`, {
-            //         status: 401,
-            //         error: 'Invalid Credentials',
-            //     }, 5);
-      
-            //     await store.dispatch(auth('login', { email: 'bademail@gmail.com', password: 'password' }, null)).catch(() => {
-            //         const dispatchedActions = store.getActions();
-      
-            //         const actionTypes = dispatchedActions.map(action => action.type);
-      
-            //         expect(actionTypes).toEqual(expectedActions);
-            //         expect(localStorage.getItem('jwtToken')).toEqual(null);
-            //     });
+                done();
+            });
 
-            //     done();
-            // });
+            it('should dispatch AUTHENTICATING and SIGNIN_ERROR on unsuccessful login', async (done) => {
+                const expectedActions = ['AUTHENTICATING', 'SIGNIN_ERROR'];
+      
+                authAPI.mockResolvedValue({
+                    data: {
+                        status: 401,
+                        error: 'Invalid Credentials'
+                    }
+                });
+      
+                await store.dispatch(auth('login', { email: 'bademail@gmail.com', password: 'password' }, null)).catch(() => {
+                    const dispatchedActions = store.getActions();
+      
+                    const actionTypes = dispatchedActions.map(action => action.type);
+      
+                    expect(actionTypes).toEqual(expectedActions);
+                    expect(localStorage.getItem('jwtToken')).toEqual(null);
+                });
 
-            // it('should dispatch AUTHENTICATING and SIGNUP_SUCCESS on successful signup', async (done) => {
-            //     const expectedActions = ['AUTHENTICATING', 'SIGNUP_SUCCESS'];
-      
-            //     moxios.stubRequest(`${url}/auth/signup`, {
-            //         status: 201,
-            //         response: { token, user: values }
-            //     }, 5);
+                done();
+            });
 
-            //     await store.dispatch(auth('signup', values, null)).then(() => {
-            //         const dispatchedActions = store.getActions();
+            it('should dispatch AUTHENTICATING and SIGNUP_SUCCESS on successful signup', (done) => {
+                const expectedActions = ['AUTHENTICATING', 'SIGNUP_SUCCESS'];
       
-            //         const actionTypes = dispatchedActions.map(action => action.type);
+                authAPI.mockResolvedValue({
+                    data: {
+                        status: 201,
+                        data: {
+                            token,
+                            ...newUser
+                        }
+                    }
+                });
+
+                store.dispatch(auth('signup', values, null)).then(() => {
+                    const dispatchedActions = store.getActions();
+      
+                    const actionTypes = dispatchedActions.map(action => action.type);
       
       
-            //         expect(actionTypes).toEqual(expectedActions);
-            //         expect(localStorage.getItem('jwtToken')).toEqual(token);
-            //     });
+                    expect(actionTypes).toEqual(expectedActions);
+                    expect(localStorage.getItem('jwtToken')).toEqual(token);
+                });
                 
-            //     done();
-            // });
+                done();
+            });
 
             it('should dispatch AUTHENTICATING and SIGNUP_ERROR on unsuccessful signup', () => {
                 const expectedActions = ['AUTHENTICATING', 'SIGNUP_ERROR'];
@@ -223,7 +234,7 @@ describe('Auth actions', () => {
                     error: 'Email already taken',
                 }, 5);
       
-                return store.dispatch(auth('signup', values)).catch(() => {
+                store.dispatch(auth('signup', values)).catch(() => {
                     const dispatchedActions = store.getActions();
       
                     const actionTypes = dispatchedActions.map(action => action.type);

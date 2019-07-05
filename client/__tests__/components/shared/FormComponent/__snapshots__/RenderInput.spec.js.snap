@@ -13,6 +13,7 @@ exports[`Render Input should render the RenderInput component when used 1`] = `
     </label>
     <input
       className=""
+      error=""
       id="name"
       name="name"
       onChange={[Function]}

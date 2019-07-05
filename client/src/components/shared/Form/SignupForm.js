@@ -7,10 +7,10 @@ import Preloader from '@components/shared/Preloader/Preloader';
 import { authPropTypes } from '@helpers/proptypes';
 import RenderInput from '@components/shared/FormComponent/RenderInput';
 import classNames from 'classnames';
+import { validation, syncValidate, validateRequiredFormFields } from '@helpers/validations';
 import { auth } from '@actions/auth';
-import validation from '@helpers/validations/validation';
-import formValidator from "@helpers/validations/validateRequiredFormFields";
 import './Form.scss';
+
 
 class SignupForm extends Component {
     constructor(props) {
@@ -23,51 +23,48 @@ class SignupForm extends Component {
             password: '',
             passwordConfirm: '',
             errors: {},
-            formErrors: {
-                firstname: '',
-                lastname: '',
-                email: '',
-                password: '',
-                passwordConfirm: '',
-            }
+            formErrors: {},
+            formValid: false,
         };
+
+        // this.isValid = this.isValid.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({ errors: nextProps.errors });
+        }
     }
 
     handleChange(e) {
         e.preventDefault();
+        const { firstname, lastname, email, password, passwordConfirm } = this.state;
         const { name, value } = e.target;
 
-        let formErrors = this.state.formErrors;
+        const values = {
+            firstname,
+            lastname,
+            email,
+            password,
+            passwordConfirm
+        };
 
-        // switch(name) {
-        // case "firstname":
-        //     formErrors.firstname = value.length < 3
-        //         ? "minimum 3 characters required" : "";
-        //     break;
-        // case "lastname":
-        //     formErrors.lastname = value.length < 3
-        //         ? "minimum 3 characters required": "";
-        //     break;
-        // case "email":
-        //     formErrors.email = emailRegex.test(value)
-        //         ? "": "Invalid email address";
-        //     break;
-        // case "password":
-        //     formErrors.password = value.length < 6
-        //         ? "Password must be 6 characters long": "";
-        //     break;
-        // // case "passwordConfirm":
-        // //     formErrors.passwordConfirm = value !== this.state.passwordConfirm
-        // //         ? "Passwords don't match": "";
-        // //     break;
-        // default:
-        //     break;
-        // }
-
+        const errors = syncValidate(values, validation.signup);
+        const isValid = validateRequiredFormFields(errors);
         this.setState({
-            formErrors, [name]: value
+            [name]: value,
+            formErrors: errors,
+            formValid: isValid
         });
     }
+
+    handleFocus() {
+        this.setState({
+            errors: Object.assign({}, this.state.errors, { [event.target.name]: '' })
+        });
+      
+    }
+
 
     handleSubmit(event) {
         event.preventDefault();
@@ -81,37 +78,19 @@ class SignupForm extends Component {
             passwordConfirm
         };
 
-        const validForm = formValid(this.state.formErrors);
+        this.props.auth('signup', userDetails, this.props.history);
 
-        if (validForm) {
-            this.props.auth('signup', userDetails, this.props.history);
-        }
-    }
 
-    componentDidMount() {
-        if (this.props.isAuthenticated) {
-            if (this.props.user.isAdmin) {
-                this.props.history.push('/dashboard');
-            } else {
-                this.props.history.push('/home');
-            }
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.errors) {
-            this.setState({ errors: nextProps.errors });
-        }
     }
 
     render() {
         const { isLoading } = this.props;
-        const { formErrors, error } = this.state;
+        const { formErrors, errors, formValid } = this.state;
         return (
             <Fragment>
                 { typeof errors === 'string' ? 
                     <div className="alert-form">
-                        <p>{error}</p>
+                        <p>{errors}</p>
                     </div> : ''
                 }
                 <form role="signup" className="auth_form" method="POST" onSubmit={this.handleSubmit.bind(this)} noValidate>
@@ -121,10 +100,11 @@ class SignupForm extends Component {
                             label="First name"
                             id="firstname"
                             type="text"
-                            className={classNames('form-control', { 'error': formErrors.firstname })}
+                            className={classNames('w-full py-4 border-purple-600 border-b-2', { 'error': formErrors.firstname })}
                             placeholder="First name"
                             value={this.state.firstname}
                             handleChange={this.handleChange.bind(this)}
+                            onFocus={this.handleFocus.bind(this)}
                             error={formErrors.firstname}
                         />
                         <RenderInput
@@ -132,10 +112,11 @@ class SignupForm extends Component {
                             label="Last name"
                             id="lastname"
                             type="text"
-                            className={classNames('form-control', { 'error': formErrors.lastname })}
+                            className={classNames('w-full py-4 border-purple-600 border-b-2', { 'error': formErrors.lastname })}
                             placeholder="First name"
                             value={this.state.lastname}
                             handleChange={this.handleChange.bind(this)}
+                            onFocus={this.handleFocus.bind(this)}
                             error={formErrors.lastname}
                         />
                     </div>
@@ -145,10 +126,11 @@ class SignupForm extends Component {
                             label="Email Address"
                             id="email"
                             type="email"
-                            className={classNames('form-control', { 'error': formErrors.email })}
+                            className={classNames('w-full py-4 border-purple-600 border-b-2', { 'error': formErrors.email })}
                             placeholder="Email Address"
                             value={this.state.email}
                             handleChange={this.handleChange.bind(this)}
+                            onFocus={this.handleFocus.bind(this)}
                             error={formErrors.email}
                         />
                     </div>
@@ -158,10 +140,11 @@ class SignupForm extends Component {
                             label="Password"
                             id="password"
                             type="password"
-                            className={classNames('form-control', { 'error': formErrors.password })}
+                            className={classNames('w-full py-4 border-purple-600 border-b-2', { 'error': formErrors.password })}
                             placeholder="***********"
                             value={this.state.password}
                             handleChange={this.handleChange.bind(this)}
+                            onFocus={this.handleFocus.bind(this)}
                             error={formErrors.password}
                         />
                     </div>
@@ -171,21 +154,22 @@ class SignupForm extends Component {
                             label="Confirm Password"
                             id="passwordConfirm"
                             type="password"
-                            className={classNames('form-control', { 'error': formErrors.passwordConfirm })}
+                            className={classNames('w-full py-4 border-purple-600 border-b-2', { 'error': formErrors.passwordConfirm })}
                             placeholder="***********"
                             value={this.state.passwordConfirm}
                             handleChange={this.handleChange.bind(this)}
+                            onFocus={this.handleFocus.bind(this)}
                             error={formErrors.passwordConfirm}
                         />
                     </div>
     
-                    <button className="btn btn-block btn-primary" disabled={isLoading} type="submit">
+                    <button className={classNames('w-1/4 p-4 border rounded-lg my-4 hover:text-white border-purple-600 hover:bg-purple-600', { 'bg-purple-600': isLoading })} disabled={isLoading || !formValid} type="submit">
                         {isLoading === true ?
                             <Preloader
                                 type="button"
                                 style="TailSpin"
-                                height="15"
-                                width="15"
+                                height={15}
+                                width={15}
                                 color="white"
                             />
                             : 'Sign Up'}
@@ -194,10 +178,10 @@ class SignupForm extends Component {
     
                 <div className="addon_info">
                     <p>By clicking the &ldquo;Sign Up&rdquo; button, you have agreed to our 
-                        <Link to="#" className="link"> Privacy Policy</Link>, 
-                        <Link to="#" className="link"> Terms and Conditions</Link> and you are a Nigerian
+                        <Link to="#" className="text-purple-600"> Privacy Policy</Link>, 
+                        <Link to="#" className="text-purple-600"> Terms and Conditions</Link> and you are a Nigerian
                     </p>
-                    <p>Already have an account, <Link to="/auth/login" className="link"> Login</Link></p>
+                    <p>Already have an account, <Link to="/auth/login" className="text-purple-600"> Login</Link></p>
                 </div>
             </Fragment>
         );

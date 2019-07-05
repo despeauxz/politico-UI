@@ -11,18 +11,14 @@ import Adapter from 'enzyme-adapter-react-16';
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
 
+global.React = React;
 global.shallow = shallow;
 global.render = render;
 global.mount = mount;
 global.expect = expect;
+global.toJson = toJson;
 global.moxios = moxios;
 global.mockStore = mockStore;
 global.localStorage = localStorage;
 
 configure({ adapter: new Adapter() });
-
-global.React = React;
-global.shallow = shallow;
-global.mount = mount;
-global.render = render;
-global.toJson = toJson;

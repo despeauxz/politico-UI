@@ -89,11 +89,7 @@ export const auth = (type, user, history) => async (dispatch) => {
         if (type === 'signup') {
             toastr.success('Success', 'Successfully registered');
         }
-        if (response.data.data.user.isAdmin === true) {
-            history.push('/dashboard');
-        } else {
-            history.push('/home');
-        }
+        history.push('/');
     } catch (error) {
         const errorResponse = errorHandler(error);
         const dispatchType = type === 'signup' ? signupFailure : signinFailure;

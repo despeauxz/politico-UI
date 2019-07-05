@@ -1,18 +1,25 @@
 /* eslint-disable max-len */
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import HomeHeader from '@components/shared/Header/HomeHeader';
+import PropTypes from 'prop-types';
+import Dashboard from '@containers/pages/Dashboard';
+import Preloader from '@components/shared/Preloader/Preloader';
+import HomeHeader from '@containers/shared/Header';
 import Icon from '@base/img/undraw.png';
 
-const Welcome = () => {
+
+const Welcome = ({ user, isAuthenticated, authenticating }) => {
+    // if (authenticating) return <Preloader />;
+    if (!authenticating && isAuthenticated) return <Dashboard user={user} />;
+    
     return (
         <Fragment>
             <div className="overlay">
                 <h1>Vote Right</h1>
             </div>
 
+            <HomeHeader />
             <div className="container">
-                <HomeHeader />
 
                 <div className="page_header">
                     <section className="intro">
@@ -82,6 +89,12 @@ const Welcome = () => {
             </footer>
         </Fragment>
     );
+};
+
+Welcome.propTypes = {
+    user: PropTypes.object,
+    isAuthenticated: PropTypes.bool,
+    authenticating: PropTypes.bool
 };
 
 
