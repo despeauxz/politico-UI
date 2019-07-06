@@ -1,25 +1,15 @@
 language: node_js
-
 node_js:
-  - 'stable'
-
+  - stable
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 before_install:
-  - npm install
-
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-
+- npm install
 script:
-  - npm run test
-
+- npm run test
 after_success:
-  - npm run coverage
+- npm run coverage
+notifications:
+  slack:
+    secure: ukCm0H/h3dWjmBParFsNDvV6Ab6foiIu11aQBeXD3VevTsgF+0zuW9wwsx0H6Evi6hXJSEGVmUikcwJtxwoIoZm/n96CJHoU7T4yiiG1vY1NCKzFzQLkhDoZD57WLH1bHbundfGpDdSVQS59Bsq6biom/wWPzpMwtBT2VfzvTEcfgxnmBZIBFIQ1rvCUHhV59s7w0aCR3p1Xy7cNOTAa4nm5Qk94IbgxH3GPL5SJAMx8ZXcHgbPwaw1OgMWNVj6W7NleFnleKLd252g7fVpghYp25EFVLYUd7RVPA9WqE0uDf6D+Gq3ssRIl8ve35Kpuxe3TRMyE4E4OXNHPTaIL0R9ffuxpweZ+4wKZRhlXB7/Y4jXkpn7pkRVam8YRhR9pJTD8DYaNGd6f15fMZsv/L4E2jiqLeI9VTtwfGxpFxYPAP3A8iRdPu8iGtylQOFHG3I9dVH0/yyjSUJe8V27yVKOrIbyyf6GBtu6mo/rw0C7E9rT22d3SyEBgubwrPcgpSCT7UQwnjHu73kUfEivpfItRkWvLLvD4fmHqxGALk/A4M1ezNo0zD1w+lTxRTbYN2UfAI47A9NN1MW7uEIljItHpnj1Wcy4AXlOWifrTbh6GDM+SFs8lbCCig++c1Gle7VxtWL0EXY32sR7EuWx/PHZt1hZSwQqvMoMjQRTAiYo=

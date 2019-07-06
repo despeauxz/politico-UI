@@ -5,15 +5,9 @@
  * @param {object} values - field values
  * @returns {bool}  true or false
  */
-const validateRequiredFormFields = (requiredFields, values) => {
-    let valid = true;
-    requiredFields.forEach((item) => {
-        if (!values[item]) {
-            valid = false;
-            return valid;
-        }
-    });
-
+const validateRequiredFormFields = (error) => {
+    const valid = Object.values(error).length ? false : true;
+    
     return valid;
 };
 

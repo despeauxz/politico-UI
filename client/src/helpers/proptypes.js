@@ -17,8 +17,21 @@ const authPropTypes = {
     history: PropTypes.object.isRequired
 };
 
+const userPropType = PropTypes.shape({
+    id: PropTypes.number,
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
+    othername: PropTypes.string,
+    email: PropTypes.string,
+    phoneNo: PropTypes.number,
+    avatar: PropTypes.string,
+    isAdmin: PropTypes.bool,
+    partyId: PropTypes.number
+}).isRequired;
+
 
 export {
     renderAuthPropTypes,
     authPropTypes,
+    userPropType
 };

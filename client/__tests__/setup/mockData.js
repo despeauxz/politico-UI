@@ -19,6 +19,15 @@ export const initialState = {
         toastrs: [],
         confirm: null
     },
+    ui: {
+        toggle: false,
+        visibility: false
+    },
+    actions: {
+        data: [],
+        errors: {},
+        isFetching: false
+    }
 };
 
 export const userToken = `Bearer ${jwt.sign({

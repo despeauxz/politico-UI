@@ -9,10 +9,10 @@ exports[`Welcome should render the Welcome component correctly when unauthentica
       Vote Right
     </h1>
   </div>
+  <Connect(HomeHeader) />
   <div
     className="container"
   >
-    <HomeHeader />
     <div
       className="page_header"
     >

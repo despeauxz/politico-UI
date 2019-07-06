@@ -7,6 +7,7 @@ import Preloader from '@components/shared/Preloader/Preloader';
 import RenderInput from '@components/shared/FormComponent/RenderInput';
 import { authPropTypes } from '@helpers/proptypes';
 import classNames from 'classnames';
+import { validation, syncValidate, validateRequiredFormFields } from '@helpers/validations';
 import { auth } from '@actions/auth';
 import './Form.scss';
 
@@ -19,15 +20,30 @@ class LoginFrom extends Component {
             email: '',
             password: '',
             errors: {},
+            formErrors: {},
+            formValid: false
         };
     }
 
     handleChange(e) {
         e.preventDefault();
         const { name, value } = e.target;
+        const values = {
+            email: this.state.email,
+            password: this.state.password
+        };
+
+        const errors = syncValidate(values, validation.login);
+        const isValid = validateRequiredFormFields(errors);
         this.setState({
-            [name]: value
+            [name]: value,
+            formErrors: errors,
+            formValid: isValid
         });
+    }
+
+    handleFocus() {
+
     }
 
     handleSubmit(event) {
@@ -37,18 +53,8 @@ class LoginFrom extends Component {
             email: this.state.email,
             password: this.state.password,
         };
-
+                
         this.props.auth('login', values, this.props.history);
-    }
-
-    componentDidMount() {
-        if (this.props.isAuthenticated) {
-            if (this.props.user.isAdmin) {
-                this.props.history.push('/dashboard');
-            } else {
-                this.props.history.push('/home');
-            }
-        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -59,27 +65,28 @@ class LoginFrom extends Component {
 
     render() {
         const { isLoading } = this.props;
-        const { errors } = this.state;
+        const { errors, formErrors, formValid } = this.state;
 
         return (
             <Fragment>
                 { typeof errors === 'string' ? 
-                    <div className="alert-form">
+                    <div className="bg-red-200 rounded p-4 text-left text-red-800">
                         <p>{errors}</p>
                     </div> : ''
                 }
-                <form role="signup" className="auth_form" method="POST" onSubmit={this.handleSubmit.bind(this)} noValidate>
+                <form className="mt-4" onSubmit={this.handleSubmit.bind(this)} noValidate>
                     <div className="d-flex-col">
                         <RenderInput
                             name="email"
-                            label="Email Adress"
+                            label="Email Address"
                             id="email"
                             type="email"
-                            className={classNames('form-control', { 'error': errors.email })}
+                            className={classNames('w-full py-4 border-purple-600 border-b-2', { 'error': formErrors.email })}
                             placeholder="example@email.com"
                             value={this.state.email}
                             handleChange={this.handleChange.bind(this)}
-                            error={errors.email}
+                            onFocus={this.handleFocus.bind(this)}
+                            error={formErrors.email}
                             required
                         />
                     </div>
@@ -89,22 +96,23 @@ class LoginFrom extends Component {
                             label="Password"
                             id="password"
                             type="password"
-                            className={classNames('form-control', { 'error': errors.password })}
+                            className={classNames('w-full py-4 border-purple-600 border-b-2', { 'error': formErrors.password })}
                             placeholder="************"
                             value={this.state.password}
                             handleChange={this.handleChange.bind(this)}
-                            error={errors.password}
+                            onFocus={this.handleFocus.bind(this)}
+                            error={formErrors.password}
                             required
                         />
                     </div>
 
-                    <button className="btn btn-block btn-primary" disabled={this.props.isLoading} type="submit">
+                    <button className={classNames('w-1/4 p-4 border rounded-lg my-4 hover:text-white border-purple-600 hover:bg-purple-600', { 'bg-purple-600': isLoading })} disabled={isLoading || !formValid} type="submit">
                         {isLoading === true ?
                             <Preloader
                                 type="button"
                                 style="TailSpin"
-                                height="15"
-                                width="15"
+                                height={15}
+                                width={15}
                                 color="white"
                             />
                             : 'Login'}
@@ -114,10 +122,10 @@ class LoginFrom extends Component {
                 <div className="addon_info">
                     <p>
                         Don&apos;t have an account,  
-                        <Link to="/auth/signup" className="link"> Create Account</Link>
+                        <Link to="/auth/signup" className="text-purple-600"> Create Account</Link>
                     </p>
                     <p>
-                        <Link to="/auth/forgot_password" className="link">Forgot Password</Link>
+                        <Link to="/auth/forgot_password" className="text-purple-600">Forgot Password</Link>
                     </p>
                 </div>
             </Fragment>

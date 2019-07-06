@@ -12,7 +12,7 @@ const Preloader = ({ type, style, height, width, color }) => {
 
     return (
         <div className={className}>
-            <Loader type={style} height={height} width={width} color={color} />
+            <Loader type={style} height={height} width={width} color={color} className="text-center mx-auto center" />
         </div>
     );
 };
@@ -22,7 +22,7 @@ Preloader.propTypes = {
     style: PropTypes.string,
     height: PropTypes.number,
     width: PropTypes.number,
-    color: PropTypes.string
+    color: PropTypes.string,
 };
 
 Preloader.defaultProps = {

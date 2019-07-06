@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeHeader from '@components/shared/Header/HomeHeader';
+import HomeHeader from '@components/shared/Header';
 import toJson from 'enzyme-to-json';
 
 

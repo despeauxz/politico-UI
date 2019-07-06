@@ -1,4 +1,4 @@
-.btn {
+/* .btn {
     position: relative;
     margin: .8em auto;
     padding: 12px 20px;
@@ -46,5 +46,8 @@
 
 button:disabled {
     cursor: not-allowed !important;
-    pointer-events: none;
 }
+
+button:disabled:hover {
+    background: #4dc0b5;
+} */

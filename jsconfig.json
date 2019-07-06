@@ -27,7 +27,7 @@
         "./client/src/constant/*"
       ],
       "@base/*": [
-        "./client/src/base/*"
+        "./client/public/*"
       ],
       "@config/*": [
         "./client/src/config/*"

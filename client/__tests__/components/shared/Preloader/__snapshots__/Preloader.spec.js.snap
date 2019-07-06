@@ -5,6 +5,7 @@ exports[`<Preloader /> should render a preloader with type ~ button 1`] = `
   className=""
 >
   <Loader
+    className="text-center mx-auto center"
     color="green"
     height={40}
     type="TailSpin"
@@ -18,6 +19,7 @@ exports[`<Preloader /> should render a preloader with type ~ main-page 1`] = `
   className=""
 >
   <Loader
+    className="text-center mx-auto center"
     color="green"
     height={40}
     type="TailSpin"

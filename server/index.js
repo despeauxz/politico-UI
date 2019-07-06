@@ -13,7 +13,7 @@ const logger = createLogger({
 
 dotenv.config();
 const app = express();
-const publicPath = path.join(__dirname, '../client', 'dist');
+const publicPath = path.join(__dirname, '../client', '/dist');
 const { PORT: port = 8080 } = process.env;
 
 app.use(express.static(publicPath));
@@ -23,5 +23,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(port, function serverListner() {
-    logger.debug(`Server running on port ${chalk.blue(port)}`);
+    logger.debug(`Server running on port ${chalk.magenta(port)}`);
 });

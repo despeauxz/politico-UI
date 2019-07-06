@@ -4,13 +4,17 @@ import { createBrowserHistory } from 'history';
 import { reducer as toastrReducer } from 'react-redux-toastr';
 import { UNAUTHENTICATED } from '@constant/actionTypes';
 import auth from './auth';
+import actions from './actions';
+import ui from './ui';
 
 export const history = createBrowserHistory();
 
 const appReducer = combineReducers({
     router: routerReducer,
     toastr: toastrReducer,
-    auth
+    auth,
+    ui,
+    actions,
 });
 
 /**
