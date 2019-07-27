@@ -5,12 +5,11 @@ import PropTypes from 'prop-types';
 
 const BreadCrumbs = (props) => {
     return (
-        <nav className="bg-grey-light p-3 rounded font-sans w-full m-4">
+        <nav className="bg-grey-light rounded font-sans w-full flex mb-4 items-start text-sm">
             <ol className="list-reset flex text-grey-dark">
                 <li>
-                    <Link to="#" className="text-blue font-bold">Home</Link>
+                    <Link to="#" className="text-black font-bold">Home</Link>
                 </li>
-                <li><span className="mx-2">/</span></li>
                 {props.children}
             </ol>
         </nav>

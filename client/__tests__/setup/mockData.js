@@ -15,10 +15,6 @@ export const initialState = {
             pathname: '/'
         }
     },
-    toastr: {
-        toastrs: [],
-        confirm: null
-    },
     ui: {
         toggle: false,
         visibility: false
@@ -27,6 +23,11 @@ export const initialState = {
         data: [],
         errors: {},
         isFetching: false
+    },
+    party: {
+        errors: {},
+        loading: false,
+        parties: []
     }
 };
 

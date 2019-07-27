@@ -17,5 +17,10 @@ export default {
     login: {
         email: [isRequired, isValidEmail],
         password: [isRequired]
+    },
+    createParty: {
+        name: [isRequired, isName],
+        fullname: [isRequired],
+        hqAddress: [isRequired],
     }
 };

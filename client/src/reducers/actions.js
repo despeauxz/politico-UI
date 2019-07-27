@@ -6,7 +6,7 @@ import {
 
 
 const initialState = {
-    data: [],
+    data: {},
     errors: {},
     isFetching: false
 };
@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
             ...state,
             isFetching: false,
             errors: action.payload
-        }
+        };
     default:
         return state;
     }

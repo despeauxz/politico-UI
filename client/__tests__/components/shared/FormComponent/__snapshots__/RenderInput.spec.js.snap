@@ -14,7 +14,10 @@ exports[`Render Input should render the RenderInput component when used 1`] = `
     <input
       className=""
       error=""
+      errors={Object {}}
+      handleChange={[MockFunction]}
       id="name"
+      label="Name"
       name="name"
       onChange={[Function]}
       placeholder="Name"

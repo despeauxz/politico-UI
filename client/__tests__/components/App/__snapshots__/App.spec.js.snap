@@ -2,13 +2,31 @@
 
 exports[`App should render the App component correctly 1`] = `
 <Fragment>
-  <Routes />
-  <Connect(ReduxToastr)
+  <ToastContainer
+    autoClose={5000}
+    bodyClassName={null}
+    className={null}
+    closeButton={
+      <CloseButton
+        ariaLabel="close"
+      />
+    }
+    closeOnClick={true}
+    draggable={true}
+    draggablePercent={80}
+    hideProgressBar={false}
     newestOnTop={false}
-    preventDuplicates={true}
-    timeOut={3000}
-    transitionIn="bounceIn"
-    transitionOut="fadeOut"
+    pauseOnFocusLoss={true}
+    pauseOnHover={true}
+    position="top-right"
+    progressClassName={null}
+    progressStyle={null}
+    role="alert"
+    rtl={false}
+    style={null}
+    toastClassName={null}
+    transition={[Function]}
   />
+  <Routes />
 </Fragment>
 `;

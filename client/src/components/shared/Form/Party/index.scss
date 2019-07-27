@@ -1,0 +1,13 @@
+.form-group input {
+  background: inherit;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #4c51bf;
+  width: 100%;
+  padding: 1em 0;
+  margin-bottom: .5em;
+}
+
+.error {
+  border-bottom: 1px solid #e53e3e;
+}

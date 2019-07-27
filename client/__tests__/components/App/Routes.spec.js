@@ -63,6 +63,36 @@ describe('Routes', () => {
 
         expect(wrapper.find('Auth')).toBeTruthy();
     });
+
+    it('should render parties page', () => {
+        const comp = 
+        <Provider store={store}>
+            <BrowserRouter>
+                <Switch>
+                    <Routes dispatch={jest.fn()} />
+                </Switch>
+            </BrowserRouter>
+        </Provider>;
+        const wrapper = mount(comp);
+        history.push('/parties');
+
+        expect(wrapper.find('Parties')).toBeTruthy();
+    });
+
+    it('should render not found page', () => {
+        const comp = 
+        <Provider store={store}>
+            <BrowserRouter>
+                <Switch>
+                    <Routes dispatch={jest.fn()} />
+                </Switch>
+            </BrowserRouter>
+        </Provider>;
+        const wrapper = mount(comp);
+        history.push('/not-found');
+
+        expect(wrapper.find('NotFound')).toBeTruthy();
+    });
   
 
     it('should render the Routes component correctly', () => {

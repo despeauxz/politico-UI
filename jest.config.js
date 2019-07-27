@@ -25,7 +25,6 @@ module.exports = {
         "<rootDir>/server/",
         "<rootDir>/client/src/index.jsx",
         "<rootDir>/client/src/store/configureStore.js",
-        "<rootDir>/client/e2e-tests/"
     ],
     testPathIgnorePatterns: [
         "<rootDir>/node_modules/"

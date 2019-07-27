@@ -1,17 +1,18 @@
+/* eslint-disable max-len */
 import React from 'react';
 import Loader from 'react-loader-spinner';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import './Preloader.scss';
 
-const Preloader = ({ type, style, height, width, color }) => {
+const Preloader = ({ type, style, height, width, color, ...rest }) => {
     const className = classNames({
-        'main-preloader': type === 'page',
+        'main-preloader center justify-center items-center': type === 'page',
         '': type === 'button'
     });
 
     return (
-        <div className={className}>
+        <div className={className} {...rest}>
             <Loader type={style} height={height} width={width} color={color} className="text-center mx-auto center" />
         </div>
     );

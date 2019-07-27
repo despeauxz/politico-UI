@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
-// import { ConnectedRouter } from 'react-router-redux';
-import ReduxToastr from 'react-redux-toastr';
-import 'react-redux-toastr/src/styles/index.scss';
-// import { history } from '../../reducers/rootReducer';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Routes from './Routes';
 import '@base/css/main.css';
 
@@ -12,14 +10,8 @@ import '@base/css/main.css';
  */
 const App = () => 
     <Fragment>
+        <ToastContainer/>
         <Routes />
-        <ReduxToastr
-            timeOut={3000}
-            newestOnTop={false}
-            preventDuplicates
-            transitionIn="bounceIn"
-            transitionOut="fadeOut"
-        />
     </Fragment>
 ;
 

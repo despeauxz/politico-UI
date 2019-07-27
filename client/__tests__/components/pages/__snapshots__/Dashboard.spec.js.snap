@@ -1,11 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<Dashboard/> renders Admin Dashboard page component without crashing 1`] = `
+<Fragment>
+  <div
+    className="font-sans antialiased h-screen flex"
+  >
+    <Connect(Sidebar) />
+    <div
+      className="flex-1 flex flex-col bg-white overflow-hidden"
+    >
+      <AuthHeader />
+      <div
+        className="px-6 py-4 flex-1 overflow-y-scroll"
+      >
+        <Connect(Admin) />
+      </div>
+    </div>
+  </div>
+</Fragment>
+`;
+
 exports[`<Dashboard/> renders Home page component without crashing 1`] = `
 <Fragment>
-  <Connect(HomeHeader) />
-  <Sidebar />
   <div
-    className="container mx-auto"
-  />
+    className="font-sans antialiased h-screen flex"
+  >
+    <Connect(Sidebar) />
+    <div
+      className="flex-1 flex flex-col bg-white overflow-hidden"
+    >
+      <AuthHeader />
+      <div
+        className="px-6 py-4 flex-1 overflow-y-scroll"
+      >
+        <Connect(Home) />
+      </div>
+    </div>
+  </div>
 </Fragment>
 `;

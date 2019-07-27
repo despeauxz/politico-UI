@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const htmlPlugin = new HtmlWebPackPlugin({
     title: 'Politico',
@@ -50,5 +51,6 @@ module.exports = {
     },
     plugins: [
         htmlPlugin,
+        new Dotenv()
     ]
 };

@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import axios from 'axios';
 import moxios from 'moxios';
 import MockAdapter from 'axios-mock-adapter';
-import instance from '../../src/config/axios';
+import instance from '@config/axios';
 import authAPI from '@utils/api/authAPI';
 
 import {
@@ -12,6 +12,7 @@ import {
     authenticating,
     authenticationSuccess,
     authenticationFailure,
+    authenticateUser,
     signinSuccess,
     signinFailure,
     signupSuccess,
@@ -24,6 +25,7 @@ import {
 
 const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1';
 const middlewares = [thunk];
+const mockReq = new MockAdapter(instance);
 const mockStore = configureMockStore(middlewares);
 
 jest.mock('../../src/utils/api/authAPI.js');
@@ -153,6 +155,7 @@ describe('Auth actions', () => {
     
             afterEach(() => {
                 moxios.uninstall(axios);
+                store.clearActions();
             });
 
             it('should dispatch AUTHENTICATING and SIGNIN_SUCCESS on successful login', async (done) => {

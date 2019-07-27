@@ -21,7 +21,7 @@ export const fetchDataError = error => ({
 
 export const appDataCount = () => async (dispatch) => {
     try {
-        dispatch(isFetching);
+        dispatch(isFetching());
 
         const response = await instance.get('/auth/details');
 

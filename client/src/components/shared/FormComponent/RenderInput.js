@@ -25,7 +25,7 @@ class RenderInput extends Component {
   render() {
       const {
           id, type, name, placeholder, className,
-          value, error, required, onFocus
+          value, error, required, onFocus, ...rest
       } = this.props;
       
       return (
@@ -46,8 +46,9 @@ class RenderInput extends Component {
                       onChange={e => this.props.handleChange(e)}
                       onFocus={onFocus}
                       error={error}
+                      {...rest}
                   />
-                  {error && <div className="text-red-600 text-xs text-left mt-1">{error}</div>}
+                  {error && <div className="text-red-600 text-xs text-left">{error}</div>}
               </div>
           </Fragment>
       );

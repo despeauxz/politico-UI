@@ -1,4 +1,4 @@
-import { toastr } from 'react-redux-toastr';
+import { toast } from 'react-toastify';
 import errorHandler from '../helpers/errorHandler';
 import authAPI from '../utils/api/authAPI';
 import jwt_decode from 'jwt-decode';
@@ -87,7 +87,7 @@ export const auth = (type, user, history) => async (dispatch) => {
         const dispatchType = type === 'signup' ? signupSuccess : signinSuccess;
         dispatch(dispatchType(response.data.data.user));
         if (type === 'signup') {
-            toastr.success('Success', 'Successfully registered');
+            toast.success('Successfully registered');
         }
         history.push('/');
     } catch (error) {

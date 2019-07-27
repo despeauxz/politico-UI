@@ -5,16 +5,16 @@ const renderAuthPropTypes = {
 };
 
 const authPropTypes = {
-    auth: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired,
+    auth: PropTypes.func,
+    isAuthenticated: PropTypes.bool,
     errors: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.object
     ]),
     user: PropTypes.object.isRequired,
-    loading: PropTypes.bool.isRequired,
-    working: PropTypes.bool.isRequired,
-    history: PropTypes.object.isRequired
+    loading: PropTypes.bool,
+    working: PropTypes.bool,
+    history: PropTypes.object
 };
 
 const userPropType = PropTypes.shape({

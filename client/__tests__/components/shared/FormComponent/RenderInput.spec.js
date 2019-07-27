@@ -20,4 +20,14 @@ describe('Render Input', () => {
         expect(toJson(shallowWrapper)).toMatchSnapshot();
         expect(shallowWrapper.find('RenderInput')).toBeTruthy();
     });
+
+    it('should call onChange prop', () => {
+        const onChange = jest.fn();
+
+        const component = mount(<RenderInput {...props} handleChange={onChange} />);
+        component.find('input').simulate('change');
+        expect(onChange).toHaveBeenCalled();
+
+        component.unmount();
+    });
 });
