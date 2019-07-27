@@ -1,0 +1,21 @@
+plugins:
+  duplication:
+    enabled: true
+    config:
+      languages:
+        javascript:
+          mass_threshold: 50
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+  nodesecurity:
+    enabled: true
+
+exclude_paths:
+  - ".nyc_output"
+  - "coverage"
+  - "node_modules"
+  - "client/__tests__"
+  - "client/dist"
+  - "client/public"

@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SideNav /> render the side navigation component 1`] = `
+<Fragment>
+  <div
+    className="bg-indigo-900 text-purple-lighter flex-none w-64 pb-6 hidden md:block"
+  >
+    <div
+      className="text-white mb-2 mt-3 px-4 flex justify-between"
+    >
+      <div
+        className="flex-auto"
+      >
+        <Link
+          className="font-semibold text-xl leading-tight mb-1 truncate"
+          to="/"
+        >
+          Politico
+        </Link>
+        <div
+          className="flex items-center my-4 relative"
+        >
+          <span
+            className="bg-green-600 rounded-full block w-2 h-2 mr-2"
+          />
+          <Link
+            className="text-white opacity-50 text-sm"
+            onClick={[Function]}
+            to="#"
+          >
+            John
+             
+            Doe
+          </Link>
+          <div
+            className="absolute w-64 p-6 rounded border top-25 z-10 h-auto bg-white text-black shadow-lg hidden"
+          >
+            <div
+              className=""
+            >
+              <div
+                className="flex mb-8"
+              >
+                <img
+                  alt="avatar"
+                  className="w-8 h-8 rounded mr-4"
+                  src="https://avatars2.githubusercontent.com/u/16857803?s=400&u=e8a05c3a90f7fd096d4ba8e7438d94704b0cc3a6&v=4"
+                />
+                <h3
+                  className="text-gray-900 font-black text-normal"
+                >
+                  John
+                   
+                  Doe
+                </h3>
+              </div>
+              <div
+                className="text-gray-900 text-base"
+              >
+                <div
+                  className="block mb-4"
+                >
+                  <Link
+                    to="/profile"
+                  >
+                    Profile and Settings
+                  </Link>
+                </div>
+                <div
+                  className="border block my-4"
+                />
+                <div
+                  className="block mb-4"
+                >
+                  <Link
+                    onClick={[Function]}
+                    to="/"
+                  >
+                    Sign out
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <svg
+          className="h-6 w-6 fill-current text-white opacity-25"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M14 8a4 4 0 1 0-8 0v7h8V8zM8.027 2.332A6.003 6.003 0 0 0 4 8v6l-3 2v1h18v-1l-3-2V8a6.003 6.003 0 0 0-4.027-5.668 2 2 0 1 0-3.945 0zM12 18a2 2 0 1 1-4 0h4z"
+            fillRule="evenodd"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      className="my-8"
+    >
+      <div
+        className="px-4 mb-2 text-white flex justify-between items-center"
+      >
+        <div
+          className="opacity-75"
+        >
+          Features
+        </div>
+        <div>
+          <Plus />
+        </div>
+      </div>
+      <div
+        className="flex items-center my-4"
+      >
+        <Link
+          className="text-white opacity-75 block w-full p-4 hover:bg-teal-400"
+          to="/parties"
+        >
+          Parties
+        </Link>
+      </div>
+    </div>
+  </div>
+</Fragment>
+`;
