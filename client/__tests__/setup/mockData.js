@@ -28,6 +28,11 @@ export const initialState = {
         errors: {},
         loading: false,
         parties: []
+    },
+    office: {
+        errors: {},
+        loading: false,
+        offices: []
     }
 };
 

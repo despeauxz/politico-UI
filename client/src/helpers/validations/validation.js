@@ -3,7 +3,6 @@ import {
     isRequired,
     isValidEmail,
     minLength6,
-    isValidPasswordConfirm
 } from './validationTypes';
 
 export default {

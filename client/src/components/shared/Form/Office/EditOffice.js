@@ -4,34 +4,36 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import RenderInput from '@components/shared/FormComponent/RenderInput';
 import Preloader from '@components/shared/Preloader/Preloader';
-import './index.scss';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import '../Party/index.scss';
 
 
 class NewParty extends Component {
     static propTypes = {
         errors: PropTypes.shape({}),
-        editParty: PropTypes.func.isRequired,
+        editOffice: PropTypes.func.isRequired,
         loading: PropTypes.bool.isRequired,
-        party: PropTypes.object
+        office: PropTypes.object
     }
 
     constructor(props) {
         super(props);
-        const { name, fullname, hqaddress } = this.props.party;
+        const { name, type } = this.props.office;
         this.state = {
             name,
-            fullname,
-            hqAddress: hqaddress,
+            type,
+            electionDate: '',
             errors: {},
         };
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        const { editParty, party: { id } } = this.props;
-        const { name } = this.state;
-        const values = { name };
-        editParty(id, values);
+        const { editOffice, office: { id } } = this.props;
+        const { name, type, electionDate } = this.state;
+        const values = { name, type, electionDate };
+        editOffice(id, values);
     }
 
     handleChange(e) {
@@ -41,6 +43,12 @@ class NewParty extends Component {
   
         this.setState({
             [name]: value
+        });
+    }
+
+    handleDateChange = (date) => {
+        this.setState({
+            electionDate: date
         });
     }
 
@@ -69,32 +77,28 @@ class NewParty extends Component {
                         handleChange={this.handleChange.bind(this)}
                         onFocus={() => {}}
                     />
-                    <RenderInput
-                        label="Full Name"
-                        type="text"
-                        name="fullname"
-                        id="fullname"
-                        disabled
-                        placeholder="Full Name"
-                        value={this.state.fullname}
-                        className={classNames('form-control border border-indigo-700 text-gray-600', { 'error': errors.fullname })}
-                        error={errors.fullname ? errors.fullname.msg : ''}
-                        handleChange={this.handleChange.bind(this)}
-                        onFocus={() => {}}
-                    />
-                    <RenderInput
-                        label="HQ Address"
-                        type="text"
-                        name="hqAddress"
-                        id="hqAddress"
-                        placeholder="HQ Address"
-                        disabled
-                        value={this.state.hqAddress}
-                        className={classNames('form-control border border-indigo-700 text-gray-600', { 'error': errors.hqAddress })}
-                        error={errors.hqAddress ? errors.hqAddress.msg : ''}
-                        handleChange={this.handleChange.bind(this)}
-                        onFocus={() => {}}
-                    />
+                    
+                    <div className="form-group">
+                        <label htmlFor="type" className="control-label">Type</label>
+                        <select onChange={this.handleChange.bind(this)} name="type" value={this.state.type} className="form-control border border-indigo-700 text-gray-600">
+                            <option value="Federal" defaultValue="Federal">Federal</option>
+                            <option value="Legislative">Legislative</option>
+                            <option value="State">State</option>
+                            <option value="Local">Local</option>
+                        </select>
+                        {errors.type && <div className="text-red-600 text-xs text-left">{errors.type.msg}</div>}
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="date" className="control-label">Election Date</label>
+                        <DatePicker
+                            selected={this.state.electionDate}
+                            onChange={this.handleDateChange}
+                            className="text-black block"
+                            placeholder="Select election date"
+                        />
+                        {errors.electionDate && <div className="text-red-600 text-xs text-left">{errors.electionDate.msg}</div>}
+                    </div>
 
                     <button className="py-3 px-6 my-8 rounded text-white bg-teal-600 hover:bg-teal-700 shadow-lg" disabled={loading} type="submit">
                         {loading === true ?

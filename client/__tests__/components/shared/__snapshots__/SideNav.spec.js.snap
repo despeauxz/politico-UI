@@ -121,6 +121,16 @@ exports[`<SideNav /> render the side navigation component 1`] = `
           Parties
         </Link>
       </div>
+      <div
+        className="flex items-center"
+      >
+        <Link
+          className="text-white opacity-75 block w-full p-4 hover:bg-teal-400"
+          to="/office"
+        >
+          Offices
+        </Link>
+      </div>
     </div>
   </div>
 </Fragment>

@@ -100,6 +100,8 @@ export const editParty = (id, data) => async (dispatch) => {
 
 export const deleteParty = (id) => async (dispatch) => {
     try {
+        dispatch(isLoading());
+
         await instance.delete(`/parties/${id}`);
         dispatch(deletePartySuccess({ id }));
         dispatch(toggleModal(false));

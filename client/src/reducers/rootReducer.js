@@ -5,6 +5,7 @@ import { UNAUTHENTICATED } from '@constant/actionTypes';
 import auth from './auth';
 import actions from './actions';
 import party from './parties';
+import office from './office';
 import ui from './ui';
 
 export const history = createBrowserHistory();
@@ -13,6 +14,7 @@ const appReducer = combineReducers({
     router: routerReducer,
     auth,
     party,
+    office,
     ui,
     actions,
 });

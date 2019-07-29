@@ -5,7 +5,8 @@ const props = {
     user: {
         firstname: 'John',
         lastname: 'Doe'
-    }
+    },
+    logout: jest.fn()
 };
 
 describe('<SideNav />', () => {
