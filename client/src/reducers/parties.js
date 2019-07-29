@@ -19,6 +19,14 @@ const initialState = {
 
 
 export default (state = initialState, action) => {
+    const removeParty = (payload) => state.parties.filter(party => party.id !== payload.id);
+    const editParty = (payload) => {
+        const array = state.parties.slice();
+        const index = array.findIndex(party => party.id === payload.id);
+        array[index] = payload;
+
+        return array;
+    };
     switch (action.type) {
     case LOADING:
         return {
@@ -41,14 +49,13 @@ export default (state = initialState, action) => {
         return {
             ...state,
             loading: false,
+            parties: editParty(action.payload)
         };
     case DELETE_PARTY_SUCCESS:
         return {
             ...state,
-            parties: [
-                ...state.parties.slice(0, action.payload.id),
-                ...state.parties.slice(action.payload.id + 1)
-            ],
+            loading: false,
+            parties: removeParty(action.payload),
         };
     case ADD_PARTY_FAILURE:
     case GET_PARTIES_FAILURE:

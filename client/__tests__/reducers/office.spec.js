@@ -1,12 +1,12 @@
-import reducer from '@reducers/parties';
+import reducer from '@reducers/office';
 
 const state = {
     errors: {},
     loading: false,
-    parties: [{ id: 1, name: 'PDP' }]
+    offices: [{ id: 1, name: 'President' }]
 };
 
-describe('Party Reducers', () => {
+describe('Offices Reducers', () => {
     it('should return initial State', () => {
         const newState = reducer(state, {});
 
@@ -21,22 +21,22 @@ describe('Party Reducers', () => {
         expect(newState).toEqual({ ...state, loading: true });
     });
 
-    it('should handle ADD_PARTY_SUCCESS action', () => {
+    it('should handle ADD_OFFICE_SUCCESS action', () => {
         const newState = reducer(state, {
-            type: 'ADD_PARTY_SUCCESS',
-            payload: { id: 1, name: 'APC' },
+            type: 'ADD_OFFICE_SUCCESS',
+            payload: { id: 1, name: 'President' },
         });
   
         expect(newState).toEqual({
             ...state,
             loading: false,
-            parties: [{ id: 1, name: 'PDP' }, { id: 1, name: 'APC' }]
+            offices: [{ id: 1, name: 'President' }, { id: 1, name: 'President' }]
         });
     });
 
     it('should handle ADD_PARTY_FAILURE action', () => {
         const newState = reducer(state, {
-            type: 'ADD_PARTY_FAILURE',
+            type: 'ADD_OFFICE_FAILURE',
             payload: 'Error',
         });
   
@@ -47,13 +47,13 @@ describe('Party Reducers', () => {
         });
     });
 
-    it('should handle GET_PARTIES_SUCCESS action', () => {
+    it('should handle GET_OFFICES_SUCCESS action', () => {
         const newState = reducer(state, {
-            type: 'GET_PARTIES_SUCCESS',
+            type: 'GET_OFFICES_SUCCESS',
             payload: [
                 {
                     id: 1,
-                    name: 'APC'
+                    name: 'President'
                 }
             ],
         });
@@ -61,16 +61,16 @@ describe('Party Reducers', () => {
         expect(newState).toEqual({
             ...state,
             loading: false,
-            parties: [{
+            offices: [{
                 id: 1,
-                name: 'APC'
+                name: 'President'
             }]
         });
     });
 
-    it('should handle GET_PARTIES_FAILURE action', () => {
+    it('should handle GET_OFFICES_FAILURE action', () => {
         const newState = reducer(state, {
-            type: 'GET_PARTIES_FAILURE',
+            type: 'GET_OFFICES_FAILURE',
             payload: 'Error',
         });
 
@@ -81,21 +81,22 @@ describe('Party Reducers', () => {
         });
     });
 
-    it('should handle EDIT_PARTY_SUCCESS action', () => {
+    it('should handle EDIT_OFFICE_SUCCESS action', () => {
         const newState = reducer(state, {
-            type: 'EDIT_PARTY_SUCCESS',
-            payload: { id: 1, name: 'PDP' },
+            type: 'EDIT_OFFICE_SUCCESS',
+            payload: { id: 1, name: 'President' },
         });
-
+        
         expect(newState).toEqual({
             ...state,
             loading: false,
+            offices: [{ id: 1, name: 'President' }]
         });
     });
 
-    it('should handle EDIT_PARTY_FAILURE action', () => {
+    it('should handle EDIT_OFFICE_FAILURE action', () => {
         const newState = reducer(state, {
-            type: 'EDIT_PARTY_FAILURE',
+            type: 'EDIT_OFFICE_FAILURE',
             payload: 'Error',
         });
 
@@ -106,20 +107,20 @@ describe('Party Reducers', () => {
         });
     });
 
-    it('should handle DELETE_PARTY_SUCCESS action', () => {
+    it('should handle DELETE_OFFICE_SUCCESS action', () => {
         const newState = reducer(state, {
-            type: 'DELETE_PARTY_SUCCESS',
-            payload: { name: 'APC' },
+            type: 'DELETE_OFFICE_SUCCESS',
+            payload: { id: 2, name: 'APC' },
         });
 
         expect(newState).toEqual({
             ...state,
             loading: false,
-            parties: [{ id: 1, name: 'PDP' }]
+            offices: [{ id: 1, name: 'President' }]
         });
     });
 
-    it('should handle DELETE_PARTY_FAILURE action', () => {
+    it('should handle DELETE_OFFICE_FAILURE action', () => {
         const newState = reducer(state, {
             type: 'DELETE_PARTY_FAILURE',
             payload: 'Error',
@@ -128,8 +129,32 @@ describe('Party Reducers', () => {
         expect(newState).toEqual({
             ...state,
             loading: false,
-            errors: 'Error',
-            parties: [{ id: 1, name: 'PDP' }]
+            errors: {}
+        });
+    });
+
+    it('should handle ASPIRE_OFFICE_SUCCESS action', () => {
+        const newState = reducer(state, {
+            type: 'ASPIRE_OFFICE_SUCCESS',
+            payload: { name: 'APC' },
+        });
+
+        expect(newState).toEqual({
+            ...state,
+            loading: false,
+        });
+    });
+
+    it('should handle ASPIRE_OFFICE_FAILURE action', () => {
+        const newState = reducer(state, {
+            type: 'ASPIRE_PARTY_FAILURE',
+            payload: 'Error',
+        });
+
+        expect(newState).toEqual({
+            ...state,
+            loading: false,
+            errors: {}
         });
     });
 });

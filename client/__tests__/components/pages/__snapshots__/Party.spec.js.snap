@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Party Pages should render the index page and Delete party modal based on props ~ type 1`] = `
+<Fragment>
+  <div
+    className="font-sans antialiased h-screen flex"
+  >
+    <Connect(Sidebar) />
+    <div
+      className="flex-1 flex flex-col bg-white overflow-hidden"
+    >
+      <AuthHeader />
+      <div
+        className="px-6 py-4 flex-1 overflow-y-scroll"
+      >
+        <div
+          className="center text-center"
+        >
+          <button
+            className="p-3 rounded text-white bg-teal-600 hover:bg-teal-700 shadow-lg"
+            onClick={[Function]}
+          >
+            <span
+              className="inline-block mr-2"
+            >
+              <Plus />
+            </span>
+            New Party
+          </button>
+        </div>
+        <div
+          className="mt-8 flex flex-wrap justify-between"
+        />
+      </div>
+    </div>
+  </div>
+</Fragment>
+`;
+
+exports[`Party Pages should render the index page and Edit party modal based on props ~ type 1`] = `
+<Fragment>
+  <div
+    className="font-sans antialiased h-screen flex"
+  >
+    <Connect(Sidebar) />
+    <div
+      className="flex-1 flex flex-col bg-white overflow-hidden"
+    >
+      <AuthHeader />
+      <div
+        className="px-6 py-4 flex-1 overflow-y-scroll"
+      >
+        <div
+          className="center text-center"
+        >
+          <button
+            className="p-3 rounded text-white bg-teal-600 hover:bg-teal-700 shadow-lg"
+            onClick={[Function]}
+          >
+            <span
+              className="inline-block mr-2"
+            >
+              <Plus />
+            </span>
+            New Party
+          </button>
+        </div>
+        <div
+          className="mt-8 flex flex-wrap justify-between"
+        />
+      </div>
+    </div>
+  </div>
+</Fragment>
+`;
+
+exports[`Party Pages should render the index page and New party modal based on props ~ type 1`] = `
+<Fragment>
+  <div
+    className="font-sans antialiased h-screen flex"
+  >
+    <Connect(Sidebar) />
+    <div
+      className="flex-1 flex flex-col bg-white overflow-hidden"
+    >
+      <AuthHeader />
+      <div
+        className="px-6 py-4 flex-1 overflow-y-scroll"
+      >
+        <div
+          className="center text-center"
+        >
+          <button
+            className="p-3 rounded text-white bg-teal-600 hover:bg-teal-700 shadow-lg"
+            onClick={[Function]}
+          >
+            <span
+              className="inline-block mr-2"
+            >
+              <Plus />
+            </span>
+            New Party
+          </button>
+        </div>
+        <div
+          className="mt-8 flex flex-wrap justify-between"
+        />
+      </div>
+    </div>
+  </div>
+</Fragment>
+`;
+
+exports[`Party Pages should render the index page based on props ~ type 1`] = `
+<Fragment>
+  <div
+    className="font-sans antialiased h-screen flex"
+  >
+    <Connect(Sidebar) />
+    <div
+      className="flex-1 flex flex-col bg-white overflow-hidden"
+    >
+      <AuthHeader />
+      <div
+        className="px-6 py-4 flex-1 overflow-y-scroll"
+      >
+        <div
+          className="center text-center"
+        >
+          <button
+            className="p-3 rounded text-white bg-teal-600 hover:bg-teal-700 shadow-lg"
+            onClick={[Function]}
+          >
+            <span
+              className="inline-block mr-2"
+            >
+              <Plus />
+            </span>
+            New Party
+          </button>
+        </div>
+        <div
+          className="mt-8 flex flex-wrap justify-between"
+        />
+      </div>
+    </div>
+  </div>
+</Fragment>
+`;

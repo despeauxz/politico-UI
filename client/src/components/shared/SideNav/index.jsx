@@ -80,6 +80,9 @@ class Sidebar extends Component {
                         <div className="flex items-center my-4">
                             <Link to="/parties" className="text-white opacity-75 block w-full p-4 hover:bg-teal-400">Parties</Link>
                         </div>
+                        <div className="flex items-center">
+                            <Link to="/office" className="text-white opacity-75 block w-full p-4 hover:bg-teal-400">Offices</Link>
+                        </div>
                     </div>
                 </div>
             </Fragment>

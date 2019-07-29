@@ -12,14 +12,14 @@ const props = {
 
 describe('<Preloader />', () => {
     it('should render a preloader with type ~ button', () => {
-        const shallowWrapper = shallow(<Preloader {...props} />);
+        const shallowWrapper = mount(<Preloader {...props} />);
 
         expect(toJson(shallowWrapper)).toMatchSnapshot();
         expect(shallowWrapper.find('Preloader')).toBeTruthy();
     });
 
     it('should render a preloader with type ~ main-page', () => {
-        const shallowWrapper = shallow(<Preloader { ...props } type="main-preloder" />);
+        const shallowWrapper = mount(<Preloader { ...props } type="main-preloder" />);
 
         expect(toJson(shallowWrapper)).toMatchSnapshot();
         expect(shallowWrapper.find('Preloader')).toBeTruthy();

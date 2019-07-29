@@ -198,43 +198,79 @@ describe('Actions action', () => {
                 });
             });
 
-            // it('should return data correctly from an endpoint', () => {
-            //     const expectedActions = ['LOADING', 'EDIT_PARTY_SUCCESS', 'TOGGLE_MODAL'];
+            it('should return data correctly from an endpoint', (done) => {
+                const expectedActions = ['LOADING', 'EDIT_PARTY_SUCCESS', 'TOGGLE_MODAL'];
 
-            //     mockReq.onPatch(url).reply(200, {
-            //         id: 1,
-            //         name: 'AC',
-            //         fullname: 'Action Congress',
-            //         hqaddress: 'abuja, Wuse'
-            //     });
+                mockReq.onPatch(`${url}/1/name`, { name: 'APC' }).reply(200, {
+                    id: 1,
+                    name: 'AC',
+                    fullname: 'Action Congress',
+                    hqaddress: 'abuja, Wuse'
+                });
 
-            //     return store.dispatch(editParty()).then(() => {
-            //         const dispatchedActions = store.getActions();
+                store.dispatch(editParty(1, { name: 'APC' })).then(() => {
+                    const dispatchedActions = store.getActions();
     
-            //         const actionTypes = dispatchedActions.map(action => action.type);
+                    const actionTypes = dispatchedActions.map(action => action.type);
     
-            //         expect(actionTypes).toEqual(expectedActions);
-            //     });
-            // });
+                    expect(actionTypes).toEqual(expectedActions);
+                });
 
-            // it('should return data correctly from an endpoint', () => {
-            //     const expectedActions = ['LOADING', 'DELETE_PARTY_SUCCESS', 'TOGGLE_MODAL'];
+                done();
+            });
 
-            //     mockReq.onDelete(`${url}/1`).reply(200, {
-            //         id: 1,
-            //         name: 'AC',
-            //         fullname: 'Action Congress',
-            //         hqaddress: 'abuja, Wuse'
-            //     });
+            it('should return error from edit a party endpoint', (done) => {
+                const expectedActions = ['LOADING', 'EDIT_PARTY_FAILURE'];
 
-            //     return store.dispatch(deleteParty(1)).then(() => {
-            //         const dispatchedActions = store.getActions();
+                mockReq.onPatch(`${url}/1/name`).reply(401, { errors: 'Error' });
+
+                store.dispatch(getParties()).catch(() => {
+                    const dispatchedActions = store.getActions();
+    
+                    const actionTypes = dispatchedActions.map(action => action.type);
+    
+                    expect(actionTypes).toEqual(expectedActions);
+                });
+
+                done();
+            });
+
+            it('should return data correctly from an endpoint', (done) => {
+                const expectedActions = ['LOADING', 'DELETE_PARTY_SUCCESS', 'TOGGLE_MODAL'];
+
+                mockReq.onDelete(`${url}/1`).reply(200, {
+                    id: 1,
+                    name: 'AC',
+                    fullname: 'Action Congress',
+                    hqaddress: 'abuja, Wuse'
+                });
+
+                store.dispatch(deleteParty(1)).then(() => {
+                    const dispatchedActions = store.getActions();
   
-            //         const actionTypes = dispatchedActions.map(action => action.type);
+                    const actionTypes = dispatchedActions.map(action => action.type);
   
-            //         expect(actionTypes).toEqual(expectedActions);
-            //     });
-            // });
+                    expect(actionTypes).toEqual(expectedActions);
+                });
+
+                done();
+            });
+
+            it('should return error from delete a party endpoint', (done) => {
+                const expectedActions = ['LOADING', 'DELETE_PARTY_FAILURE'];
+
+                mockReq.onDelete(`${url}/1`).reply(401, { errors: 'Error' });
+
+                store.dispatch(deleteParty(1)).catch(() => {
+                    const dispatchedActions = store.getActions();
+    
+                    const actionTypes = dispatchedActions.map(action => action.type);
+    
+                    expect(actionTypes).toEqual(expectedActions);
+                });
+
+                done();
+            });
         });
     });
 });
