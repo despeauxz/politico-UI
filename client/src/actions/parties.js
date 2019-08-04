@@ -7,7 +7,9 @@ import {
     EDIT_PARTY_SUCCESS,
     EDIT_PARTY_FAILURE,
     DELETE_PARTY_SUCCESS,
-    DELETE_PARTY_FAILURE
+    DELETE_PARTY_FAILURE,
+    JOIN_PARTY_SUCCESS,
+    JOIN_PARTY_FAILURE
 } from '@constant/actionTypes';
 import instance from '@config/axios';
 import { toast } from 'react-toastify';
@@ -53,6 +55,16 @@ export const deletePartySuccess = party => ({
 });
 
 export const deletePartyFailure = error => ({
+    type: DELETE_PARTY_FAILURE,
+    payload: error
+});
+
+export const joinPartySuccess = party => ({
+    type: DELETE_PARTY_SUCCESS,
+    payload: party
+});
+
+export const joinPartyFailure = error => ({
     type: DELETE_PARTY_FAILURE,
     payload: error
 });

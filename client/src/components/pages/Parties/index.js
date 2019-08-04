@@ -126,12 +126,13 @@ class Parties extends Component {
                                                     </ul>
                                                 </div>
                                             }
-                                            <div className="md:flex items-center bg-white shadow-lg rounded-lg p-6">
+                                            <div className="md:flex lg:flex justify-around items-center bg-white shadow-lg rounded-lg p-6">
                                                 <img className="h-16 w-16 md:h-20 md:w-20 rounded-full mx-auto md:mx-0 md:mr-6 mb-4 md:mb-0 lg:mb-0" src={party.logourl} />
                                                 <div className="text-center md:text-left">
                                                     <h2 className="text-normal text-semibold">{party.name}</h2>
                                                     <div className="text-purple-500">{party.fullname}</div>
                                                     <div className="text-gray-600">{party.hqaddress}</div>
+                                                    <button type="button" className="px-3 py-3 text-white bg-teal-500 hover:bg-teal-600 cursor-pointer rounded shadow-lg mt-2">Join party</button>
                                                 </div>
                                             </div>
                                         </div>
