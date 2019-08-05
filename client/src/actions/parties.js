@@ -14,6 +14,7 @@ import {
 import instance from '@config/axios';
 import { toast } from 'react-toastify';
 import { toggleModal } from './ui';
+import { getProfile } from '@actions/auth';
 
 export const isLoading = () => ({
     type: LOADING
@@ -60,12 +61,12 @@ export const deletePartyFailure = error => ({
 });
 
 export const joinPartySuccess = party => ({
-    type: DELETE_PARTY_SUCCESS,
+    type: JOIN_PARTY_SUCCESS,
     payload: party
 });
 
 export const joinPartyFailure = error => ({
-    type: DELETE_PARTY_FAILURE,
+    type: JOIN_PARTY_FAILURE,
     payload: error
 });
 
@@ -123,3 +124,16 @@ export const deleteParty = (id) => async (dispatch) => {
         toast.error(`${error.response.data.error}`);
     }
 };
+
+export const joinParty = (party) => async (dispatch) => {
+    console.log(party.id);
+    try {
+        const response = await instance.patch('/auth/join-party', { partyId: party.id });
+        // console.log(party);
+
+        dispatch(joinPartySuccess(response.data.payload));
+        dispatch(getProfile());
+    } catch (error) {
+        dispatch(joinPartyFailure(error.response.data.error));
+    }
+}

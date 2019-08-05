@@ -21,7 +21,8 @@ class Parties extends Component {
         parties: PropTypes.array.isRequired,
         loading: PropTypes.bool,
         toggleModal: PropTypes.func.isRequired,
-        getParties: PropTypes.func.isRequired
+        getParties: PropTypes.func.isRequired,
+        joinParty: PropTypes.func
     }
 
     constructor(props) {
@@ -85,6 +86,12 @@ class Parties extends Component {
         });
     }
 
+    joinParty(party) {
+        // console.log(party);
+        const { joinParty } = this.props;
+        joinParty(party);
+    }
+
     render() {
         const { user, parties, loading } = this.props;
         const modal = this.displayModal();
@@ -132,7 +139,11 @@ class Parties extends Component {
                                                     <h2 className="text-normal text-semibold">{party.name}</h2>
                                                     <div className="text-purple-500">{party.fullname}</div>
                                                     <div className="text-gray-600">{party.hqaddress}</div>
-                                                    <button type="button" className="px-3 py-3 text-white bg-teal-500 hover:bg-teal-600 cursor-pointer rounded shadow-lg mt-2">Join party</button>
+                                                    {user.partyId === party.id ? (
+                                                        <h2 className="text-teal-500 mt-4 italic">Member</h2>
+                                                    ) : (
+                                                        <button type="button" className="px-3 py-3 text-white bg-teal-500 hover:bg-teal-600 cursor-pointer rounded shadow-lg mt-2" onClick={this.joinParty.bind(this, party)}>Join party</button>
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>

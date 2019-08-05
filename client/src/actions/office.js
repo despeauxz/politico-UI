@@ -143,7 +143,8 @@ export const aspireOffice = (userId, officeId, partyId) => async (dispatch) => {
         dispatch(toggleModal(false));
         toast.success('Please wait for a confirmation mail by Electoral body');
     } catch (error) {
-        dispatch(aspireOfficeFailure(error.response.data.errors));
+        toast.error(error.response.data.message);
+        dispatch(aspireOfficeFailure(error.response.data.message));
     }
 };
 
