@@ -10,6 +10,7 @@ import {
     SIGNUP_ERROR,
     SET_AUTH_WORKING,
     UNSET_AUTH_WORKING,
+    GET_CURRENT_USER,
 } from "@constant/actionTypes";
 
 const initialState = {
@@ -40,6 +41,7 @@ export default (state = initialState, action) => {
     case AUTHENTICATED:
     case SIGNIN_SUCCESS:
     case SIGNUP_SUCCESS:
+    case GET_CURRENT_USER:
         return {
             ...state,
             isAuthenticated: true,

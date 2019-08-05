@@ -9,7 +9,9 @@ import {
     DELETE_OFFICE_SUCCESS,
     DELETE_OFFICE_FAILURE,
     ASPIRE_OFFICE_SUCCESS,
-    ASPIRE_OFFICE_FAILURE
+    ASPIRE_OFFICE_FAILURE,
+    PETITION_OFFICE_SUCCESS,
+    PETITION_OFFICE_FAILURE
 } from '@constant/actionTypes';
 
 
@@ -55,6 +57,7 @@ export default (state = initialState, action) => {
             offices: editOffice(action.payload)
         };
     case ASPIRE_OFFICE_SUCCESS:
+    case PETITION_OFFICE_SUCCESS:
         return {
             ...state,
             loading: false,
@@ -70,6 +73,7 @@ export default (state = initialState, action) => {
     case EDIT_OFFICE_FAILURE:
     case DELETE_OFFICE_FAILURE:
     case ASPIRE_OFFICE_FAILURE:
+    case PETITION_OFFICE_FAILURE:
         return {
             ...state,
             loading: false,

@@ -21,7 +21,8 @@ class Parties extends Component {
         parties: PropTypes.array.isRequired,
         loading: PropTypes.bool,
         toggleModal: PropTypes.func.isRequired,
-        getParties: PropTypes.func.isRequired
+        getParties: PropTypes.func.isRequired,
+        joinParty: PropTypes.func
     }
 
     constructor(props) {
@@ -85,6 +86,12 @@ class Parties extends Component {
         });
     }
 
+    joinParty(party) {
+        // console.log(party);
+        const { joinParty } = this.props;
+        joinParty(party);
+    }
+
     render() {
         const { user, parties, loading } = this.props;
         const modal = this.displayModal();
@@ -126,12 +133,17 @@ class Parties extends Component {
                                                     </ul>
                                                 </div>
                                             }
-                                            <div className="md:flex items-center bg-white shadow-lg rounded-lg p-6">
+                                            <div className="md:flex lg:flex justify-around items-center bg-white shadow-lg rounded-lg p-6">
                                                 <img className="h-16 w-16 md:h-20 md:w-20 rounded-full mx-auto md:mx-0 md:mr-6 mb-4 md:mb-0 lg:mb-0" src={party.logourl} />
                                                 <div className="text-center md:text-left">
                                                     <h2 className="text-normal text-semibold">{party.name}</h2>
                                                     <div className="text-purple-500">{party.fullname}</div>
                                                     <div className="text-gray-600">{party.hqaddress}</div>
+                                                    {user.partyId === party.id ? (
+                                                        <h2 className="text-teal-500 mt-4 italic">Member</h2>
+                                                    ) : (
+                                                        <button type="button" className="px-3 py-3 text-white bg-teal-500 hover:bg-teal-600 cursor-pointer rounded shadow-lg mt-2" onClick={this.joinParty.bind(this, party)}>Join party</button>
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>

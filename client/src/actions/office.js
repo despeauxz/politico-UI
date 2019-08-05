@@ -12,7 +12,9 @@ import {
     DELETE_OFFICE_SUCCESS,
     DELETE_OFFICE_FAILURE,
     ASPIRE_OFFICE_SUCCESS,
-    ASPIRE_OFFICE_FAILURE
+    ASPIRE_OFFICE_FAILURE,
+    PETITION_OFFICE_SUCCESS,
+    PETITION_OFFICE_FAILURE
 } from '@constant/actionTypes';
 
 
@@ -67,6 +69,15 @@ export const aspireOfficeSuccess = candidate => ({
 
 export const aspireOfficeFailure = error => ({
     type: ASPIRE_OFFICE_FAILURE,
+    payload: error
+});
+
+export const petitionOfficeSuccess = () => ({
+    type: PETITION_OFFICE_SUCCESS
+});
+
+export const petitionOfficeFailure = error => ({
+    type: PETITION_OFFICE_FAILURE,
     payload: error
 });
 
@@ -129,9 +140,23 @@ export const aspireOffice = (userId, officeId, partyId) => async (dispatch) => {
         const response = await instance.post(`/office/${userId}/register`, { officeId, partyId });
 
         dispatch(aspireOfficeSuccess(response.data.data));
+        dispatch(toggleModal(false));
         toast.success('Please wait for a confirmation mail by Electoral body');
     } catch (error) {
-        dispatch(aspireOfficeFailure(error.response.data.errors));
+        toast.error(error.response.data.message);
+        dispatch(aspireOfficeFailure(error.response.data.message));
     }
 };
 
+export const petitionOffice = (values, officeId) => async (dispatch) => {
+    try {
+        dispatch(isLoading());
+
+        const response = await instance.post('/petition', { ...values, officeId });
+        dispatch(petitionOfficeSuccess());
+        dispatch(toggleModal(false));
+        toast.success(response.data.message);
+    } catch (error) {
+        dispatch(petitionOfficeFailure(error.response.data.errors));
+    }
+};

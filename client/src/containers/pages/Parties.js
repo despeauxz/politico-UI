@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Parties from '@components/pages/Parties';
 import { toggleModal } from '@actions/ui';
-import { getParties } from '@actions/parties';
+import { getParties, joinParty } from '@actions/parties';
 
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
@@ -11,4 +11,4 @@ const mapStateToProps = state => ({
     loading: state.party.loading
 });
 
-export default connect(mapStateToProps, { toggleModal, getParties })(Parties);
+export default connect(mapStateToProps, { toggleModal, getParties, joinParty })(Parties);

@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import errorHandler from '../helpers/errorHandler';
 import authAPI from '../utils/api/authAPI';
-import jwt_decode from 'jwt-decode';
+import instance from '@config/axios';
 import {
     AUTHENTICATING,
     AUTHENTICATED,
@@ -98,13 +98,23 @@ export const auth = (type, user, history) => async (dispatch) => {
     }
 };
 
+export const getProfile = () => async (dispatch) => {
+    try {
+        const res = await instance.get('/auth/profile');
+
+        dispatch(getCurrentUser(res.data.data.payload));
+    } catch (error) {
+        dispatch(authenticationFailure(error.response.data.error));
+    }
+};
+
 export const authenticateUser = () => async (dispatch) => {
     try {
         dispatch(authenticating());
     
-        const res = jwt_decode(localStorage.getItem('jwtToken'));
+        const res = await instance.get('/auth/profile');
     
-        dispatch(authenticationSuccess(res.user));
+        dispatch(authenticationSuccess(res.data.data.payload));
     } catch (error) {
         const errorResponse = errorHandler(error);
     

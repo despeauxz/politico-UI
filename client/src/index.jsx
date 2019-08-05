@@ -3,7 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './components/App';
-import store from './store/configureStore';
+import { store } from './store/configureStore';
 import refreshPage from './utils/refreshPage';
 
 refreshPage(store);

@@ -11,6 +11,7 @@ import NewOffice from '@containers/shared/Form/Office/NewOffice';
 import EditOfficeForm from '@containers/shared/Form/Office/EditOffice';
 import DeleteOfficeForm from '@components/shared/Form/Office/DeleteOffice';
 import AspireOfficeForm from '@components/shared/Form/Office/AspireOffice';
+import PetitionOffice from '@containers/shared/Form/Office/PetitionOffice';
 import '@components/shared/SideNav/index.scss';
 
 
@@ -108,7 +109,7 @@ class Office extends Component {
             </Modal>;
         case 'petition':
             return <Modal toggle={toggle} title="Petition">
-                Petition
+                <PetitionOffice office={office} />
             </Modal>;
         case 'edit':
             return <Modal toggle={toggle} title="Edit Office">
