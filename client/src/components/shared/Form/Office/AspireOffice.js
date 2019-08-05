@@ -35,13 +35,8 @@ class DeleteParty extends Component {
     render() {
         return (
             <div className="mt-4">
-<<<<<<< HEAD
                 <button className="py-2 px-6 mr-6 text-white bg-green-500 rounded" onClick={this.aspire.bind(this)}>Yes</button>
                 <button className="py-2 px-6 text-white bg-red-500 rounded" onClick={this.closeModal}>No</button>
-=======
-                <button className="py-4 px-6 mr-6 text-white bg-green-500 rounded" onClick={this.aspire.bind(this)}>Yes</button>
-                <button className="py-4 px-6 text-white bg-red-500 rounded" onClick={this.closeModal}>No</button>
->>>>>>> develop
             </div>
         );
     }

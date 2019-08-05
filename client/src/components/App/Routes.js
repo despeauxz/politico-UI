@@ -6,10 +6,7 @@ import NotFound from '@components/pages/NotFound';
 import Authenticator from '@containers/hoc/Authenticator';
 import Parties from '@containers/pages/Parties';
 import Office from '@containers/pages/Office';
-<<<<<<< HEAD
 import Profile from '@containers/pages/Profile';
-=======
->>>>>>> develop
 
 
 const Routes = () => 

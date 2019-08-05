@@ -72,7 +72,6 @@ export const aspireOfficeFailure = error => ({
     payload: error
 });
 
-<<<<<<< HEAD
 export const petitionOfficeSuccess = () => ({
     type: PETITION_OFFICE_SUCCESS
 });
@@ -82,8 +81,6 @@ export const petitionOfficeFailure = error => ({
     payload: error
 });
 
-=======
->>>>>>> develop
 export const createOffice = (values) => async (dispatch) => {
     try {
         dispatch(isLoading());
@@ -143,7 +140,6 @@ export const aspireOffice = (userId, officeId, partyId) => async (dispatch) => {
         const response = await instance.post(`/office/${userId}/register`, { officeId, partyId });
 
         dispatch(aspireOfficeSuccess(response.data.data));
-<<<<<<< HEAD
         dispatch(toggleModal(false));
         toast.success('Please wait for a confirmation mail by Electoral body');
     } catch (error) {
@@ -164,11 +160,3 @@ export const petitionOffice = (values, officeId) => async (dispatch) => {
         dispatch(petitionOfficeFailure(error.response.data.errors));
     }
 };
-=======
-        toast.success('Please wait for a confirmation mail by Electoral body');
-    } catch (error) {
-        dispatch(aspireOfficeFailure(error.response.data.errors));
-    }
-};
-
->>>>>>> develop
